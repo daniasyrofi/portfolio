@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Details that make interfaces feel better · Dani Asyrofi</title>
+<meta name="description" content="A curated study of 30+ interface details, each one grounded in a specific production example from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion, and other top-tier products. Not claims. Observations." />
+<meta name="author" content="Muhammad Dani Asyrofi" />
+<meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0e0d0b" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+<link rel="canonical" href="https://daniasyrofi.com/writing/details-that-make-interfaces-feel-better/" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Dani Asyrofi" />
+<meta property="og:title" content="Details that make interfaces feel better" />
+<meta property="og:description" content="A curated study of 30+ interface details, each one grounded in a specific production example from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, and Notion." />
+<meta property="og:url" content="https://daniasyrofi.com/writing/details-that-make-interfaces-feel-better/" />
+<meta property="og:image" content="https://daniasyrofi.com/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:author" content="Muhammad Dani Asyrofi" />
+<meta property="article:section" content="Design" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Details that make interfaces feel better" />
+<meta name="twitter:description" content="30+ curated interface details with real examples from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, and Notion." />
+<meta name="twitter:image" content="https://daniasyrofi.com/assets/og-image.png" />
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Details that make interfaces feel better",
+  "description": "A curated study of 30+ interface details grounded in production examples from top-tier products.",
+  "image": "https://daniasyrofi.com/assets/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Muhammad Dani Asyrofi",
+    "url": "https://daniasyrofi.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dani Asyrofi"
+  },
+  "mainEntityOfPage": "https://daniasyrofi.com/writing/details-that-make-interfaces-feel-better/",
+  "inLanguage": "en"
+}
+</script>
+
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   TOKENS (shared with portfolio)
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  --bg:          #faf8f3;
+  --bg-raised:   #ffffff;
+  --bg-sunken:   #f1eee5;
+  --bg-code:     #f4f1e8;
+  --bg-overlay:  rgba(250, 248, 243, 0.82);
+  --ink:         #141210;
+  --ink-2:       #3a342e;
+  --ink-muted:   #696157;
+  --ink-subtle:  #a39b90;
+  --accent:      #8b3a1e;
+  --accent-soft: #e7d4c2;
+  --line:        rgba(20, 18, 16, 0.08);
+  --line-strong: rgba(20, 18, 16, 0.18);
+  --shadow-sm:   0 0 0 1px rgba(20,18,16,0.05), 0 1px 2px -1px rgba(20,18,16,0.05);
+
+  --ff-serif: "Instrument Serif", Georgia, serif;
+  --ff-sans:  "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ff-mono:  "Geist Mono", ui-monospace, "SF Mono", monospace;
+
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint:  cubic-bezier(0.22, 1, 0.36, 1);
+
+  --nav-h: 60px;
+}
+
+[data-theme="dark"] {
+  --bg:          #0e0d0b;
+  --bg-raised:   #181612;
+  --bg-sunken:   #141210;
+  --bg-code:     #181612;
+  --bg-overlay:  rgba(14, 13, 11, 0.82);
+  --ink:         #f4efe4;
+  --ink-2:       #c9c1b3;
+  --ink-muted:   #908778;
+  --ink-subtle:  #5c5449;
+  --accent:      #d98e6c;
+  --accent-soft: rgba(217, 142, 108, 0.14);
+  --line:        rgba(244, 239, 228, 0.08);
+  --line-strong: rgba(244, 239, 228, 0.18);
+  --shadow-sm:   0 0 0 1px rgba(244,239,228,0.05), 0 1px 2px -1px rgba(0,0,0,0.5);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESET & BASE
+   ══════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  color-scheme: light dark;
+  scroll-padding-top: calc(var(--nav-h) + 32px);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-sans);
+  font-size: 17px;
+  line-height: 1.62;
+  letter-spacing: -0.003em;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 300ms var(--ease-out-quint), color 300ms var(--ease-out-quint);
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+a { color: inherit; text-decoration: none; transition: color 200ms var(--ease-out-quint); }
+
+h1, h2, h3, h4 {
+  font-family: var(--ff-serif);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  line-height: 1.08;
+}
+
+p { text-wrap: pretty; }
+em, .italic { font-family: var(--ff-serif); font-style: italic; font-weight: 400; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip {
+  position: fixed; top: 8px; left: 8px; z-index: 200;
+  background: var(--ink); color: var(--bg);
+  padding: 10px 14px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  transform: translateY(-200%);
+  transition: transform 200ms var(--ease-out-quint);
+}
+.skip:focus-visible { transform: translateY(0); outline: none; }
+
+/* ══════════════════════════════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-overlay);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 300ms var(--ease-out-quint);
+}
+.nav.scrolled { border-bottom-color: var(--line); }
+
+.nav-back {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13.5px; color: var(--ink-muted);
+  font-family: var(--ff-sans);
+}
+.nav-back:hover { color: var(--ink); }
+.nav-back svg {
+  width: 14px; height: 14px;
+  transition: transform 300ms var(--ease-out-expo);
+}
+.nav-back:hover svg { transform: translateX(-3px); }
+
+.nav-brand {
+  font-family: var(--ff-serif);
+  font-size: 18px; letter-spacing: -0.015em; line-height: 1;
+  display: inline-flex; align-items: baseline;
+  color: var(--ink);
+}
+.nav-brand .dot {
+  display: inline-block; width: 5px; height: 5px;
+  background: var(--accent); border-radius: 50%;
+  margin-left: 2px; transform: translateY(-6px);
+}
+
+.control-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg-raised); color: var(--ink-muted);
+  display: grid; place-items: center;
+  box-shadow: var(--shadow-sm);
+  border: 0; cursor: pointer;
+  transition: color 200ms var(--ease-out-quint), transform 300ms var(--ease-out-expo);
+}
+.control-btn:hover { color: var(--ink); transform: translateY(-1px); }
+.control-btn svg { width: 13px; height: 13px; }
+.control-btn .sun { display: none; }
+[data-theme="dark"] .control-btn .moon { display: none; }
+[data-theme="dark"] .control-btn .sun  { display: block; }
+
+/* ══════════════════════════════════════════════════════════════════
+   LAYOUT
+   ══════════════════════════════════════════════════════════════════ */
+.article-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 720px) 1fr;
+  gap: 48px;
+}
+
+.toc-col { position: relative; }
+.article { grid-column: 2; }
+
+/* ══════════════════════════════════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════════════════════════════════ */
+.article-header {
+  margin-bottom: 96px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+}
+.article-kicker {
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-subtle);
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-bottom: 36px;
+}
+.article-kicker::before {
+  content: ""; width: 32px; height: 1px; background: currentColor; opacity: 0.5;
+}
+.article-title {
+  font-size: clamp(44px, 6.5vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  margin-bottom: 28px;
+  max-width: 17ch;
+}
+.article-title em { color: var(--accent); }
+
+.article-deck {
+  font-size: clamp(19px, 2vw, 23px);
+  line-height: 1.48;
+  color: var(--ink-2);
+  font-family: var(--ff-serif);
+  max-width: 44ch;
+  margin-bottom: 40px;
+  letter-spacing: -0.005em;
+}
+
+.article-byline {
+  display: flex; flex-wrap: wrap; gap: 8px 20px;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+.article-byline .author { color: var(--ink); }
+.article-byline .sep { opacity: 0.4; }
+
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE BODY
+   ══════════════════════════════════════════════════════════════════ */
+.article p {
+  margin-bottom: 24px;
+  color: var(--ink-2);
+  font-size: 17px;
+  line-height: 1.68;
+}
+.article p:last-child { margin-bottom: 0; }
+
+.article p strong { color: var(--ink); font-weight: 500; }
+.article p em { color: var(--accent); font-style: italic; }
+
+.article a.link {
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 1px;
+  transition: color 200ms var(--ease-out-quint), border-color 200ms var(--ease-out-quint);
+}
+.article a.link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Intro / lede paragraph */
+.article .lede {
+  font-family: var(--ff-serif);
+  font-size: clamp(20px, 1.8vw, 24px);
+  line-height: 1.48;
+  color: var(--ink);
+  margin-bottom: 40px;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+  max-width: 42ch;
+}
+
+/* Section heading */
+.article h2 {
+  font-size: clamp(32px, 3.6vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.028em;
+  margin: 120px 0 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: baseline; gap: 18px;
+}
+.article h2 em { color: var(--accent); font-style: italic; }
+.article h2 .num {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  color: var(--ink-subtle);
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  text-transform: uppercase;
+  transform: translateY(-3px);
+  flex-shrink: 0;
+}
+
+.section-intro {
+  color: var(--ink-muted);
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin-bottom: 64px;
+  max-width: 58ch;
+  font-style: italic;
+  font-family: var(--ff-serif);
+}
+
+/* Detail */
+.detail {
+  margin-bottom: 72px;
+  scroll-margin-top: calc(var(--nav-h) + 32px);
+}
+.detail:last-child { margin-bottom: 0; }
+
+.detail h3 {
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.detail h3 .detail-num {
+  font-family: var(--ff-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-subtle);
+  font-weight: 500;
+  margin-right: 12px;
+  vertical-align: 3px;
+}
+.detail h3 em { color: var(--accent); font-style: italic; }
+
+.detail .kicker {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+.detail p { font-size: 16.5px; line-height: 1.68; }
+
+/* "In the wild" block */
+.wild {
+  margin: 28px 0;
+  padding: 24px 28px;
+  background: var(--bg-sunken);
+  border-radius: 12px;
+  border-left: 2px solid var(--accent);
+}
+.wild-label {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+  margin-bottom: 14px;
+  display: block;
+}
+.wild ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.wild li {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  padding-left: 20px;
+  position: relative;
+}
+.wild li::before {
+  content: "";
+  position: absolute; left: 0; top: 0.68em;
+  width: 8px; height: 1px;
+  background: var(--ink-subtle);
+}
+.wild li strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Code */
+code {
+  font-family: var(--ff-mono);
+  font-size: 0.86em;
+  color: var(--ink);
+  background: var(--bg-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  letter-spacing: -0.005em;
+}
+pre {
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg-code);
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  margin: 20px 0;
+  overflow-x: auto;
+  letter-spacing: -0.005em;
+}
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* "How" block */
+.how {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+  font-size: 15.5px;
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+.how strong { color: var(--ink); font-weight: 500; }
+.how code { font-size: 13px; }
+
+/* ══════════════════════════════════════════════════════════════════
+   TABLE OF CONTENTS (sticky desktop)
+   ══════════════════════════════════════════════════════════════════ */
+.toc {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+  font-family: var(--ff-sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  padding-top: 8px;
+  max-height: calc(100vh - var(--nav-h) - 48px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+.toc-label {
+  font-family: var(--ff-mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-subtle);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.toc ol { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.toc-group { margin-top: 14px; }
+.toc-group:first-child { margin-top: 0; }
+.toc-group-title {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+  margin-bottom: 6px;
+  display: block;
+}
+.toc a {
+  display: block;
+  padding: 4px 0 4px 24px;
+  color: var(--ink-muted);
+  position: relative;
+  line-height: 1.38;
+  transition: color 200ms var(--ease-out-quint);
+}
+.toc a::before {
+  content: attr(data-num);
+  position: absolute; left: 0; top: 4px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: var(--ink-subtle);
+  letter-spacing: 0.05em;
+}
+.toc a:hover { color: var(--ink); }
+.toc a.active { color: var(--ink); }
+.toc a.active::after {
+  content: "";
+  position: absolute; right: 0; top: 50%;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-50%);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CLOSE + NEXT
+   ══════════════════════════════════════════════════════════════════ */
+.article-close {
+  margin-top: 120px;
+  padding: 48px 0 32px;
+  border-top: 1px solid var(--line);
+}
+.article-close h2 {
+  margin-top: 0; padding-top: 0; border-top: 0;
+  font-size: clamp(28px, 3vw, 40px);
+  margin-bottom: 20px;
+  display: block;
+}
+.article-close p { font-size: 16.5px; color: var(--ink-muted); }
+
+.article-next {
+  margin-top: 56px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.article-next-meta {
+  font-family: var(--ff-mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+.article-next-home {
+  font-size: 14.5px;
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--ink);
+}
+.article-next-home:hover { color: var(--accent); }
+.article-next-home svg { width: 13px; height: 13px; transition: transform 300ms var(--ease-out-expo); }
+.article-next-home:hover svg { transform: translateX(4px); }
+
+.signature {
+  margin-top: 80px;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink-muted);
+  letter-spacing: -0.01em;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 40px;
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: 16px;
+  font-family: var(--ff-mono); font-size: 10.5px;
+  color: var(--ink-subtle); letter-spacing: 0.1em;
+  text-transform: uppercase;
+  max-width: 1280px;
+  margin: 80px auto 0;
+}
+footer .colophon {
+  max-width: 60ch; text-transform: none;
+  letter-spacing: 0; font-family: var(--ff-sans);
+  color: var(--ink-subtle);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   REVEAL
+   ══════════════════════════════════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 800ms var(--ease-out-expo), transform 800ms var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+[data-reveal].is-in {
+  opacity: 1; transform: none;
+  will-change: auto;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .article-wrap {
+    grid-template-columns: 1fr minmax(0, 720px) 1fr;
+    padding: 104px 32px 64px;
+    gap: 32px;
+  }
+  .toc { font-size: 11.5px; }
+}
+
+@media (max-width: 900px) {
+  .article-wrap {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 720px;
+    padding: 104px 28px 64px;
+    gap: 0;
+  }
+  .toc-col { display: none; }
+  .article { grid-column: 1; }
+  .article h2 { margin-top: 88px; }
+  .detail { margin-bottom: 56px; }
+}
+
+@media (max-width: 540px) {
+  .article-wrap { padding: 88px 20px 48px; }
+  .nav { padding: 0 20px; }
+  .article p, .article .lede { font-size: 16px; }
+  pre { font-size: 12px; padding: 16px 18px; }
+  .wild { padding: 20px 22px; }
+  footer { padding: 24px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
+  transition: none !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 420ms; }
+</style>
+</head>
+<body>
+
+<a href="#article" class="skip">Skip to article</a>
+
+<nav class="nav" role="navigation" aria-label="Primary">
+  <a href="/" class="nav-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="/" class="nav-brand" aria-label="Home">Dani<span class="dot"></span></a>
+  <button class="control-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  </button>
+</nav>
+
+<div class="article-wrap">
+
+  <aside class="toc-col" aria-label="Table of contents">
+    <nav class="toc" id="toc">
+      <div class="toc-label">Contents</div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">I · Typography</span>
+        <ol>
+          <li><a href="#d-01" data-num="01">Tabular numerals</a></li>
+          <li><a href="#d-02" data-num="02">Text wrap balance</a></li>
+          <li><a href="#d-03" data-num="03">Font smoothing</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">II · Geometry</span>
+        <ol>
+          <li><a href="#d-04" data-num="04">Concentric radius</a></li>
+          <li><a href="#d-05" data-num="05">Optical alignment</a></li>
+          <li><a href="#d-06" data-num="06">Pixel snapping</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">III · Motion</span>
+        <ol>
+          <li><a href="#d-07" data-num="07">Spring physics</a></li>
+          <li><a href="#d-08" data-num="08">Interruptible</a></li>
+          <li><a href="#d-09" data-num="09">Enter vs exit</a></li>
+          <li><a href="#d-10" data-num="10">Reduced motion</a></li>
+          <li><a href="#d-11" data-num="11">View Transitions</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">IV · Surfaces</span>
+        <ol>
+          <li><a href="#d-12" data-num="12">Translucency</a></li>
+          <li><a href="#d-13" data-num="13">Border and shadow</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">V · Interaction</span>
+        <ol>
+          <li><a href="#d-14" data-num="14">Focus rings</a></li>
+          <li><a href="#d-15" data-num="15">Cmd+K palette</a></li>
+          <li><a href="#d-16" data-num="16">Hover intent</a></li>
+          <li><a href="#d-17" data-num="17">Tooltip delay</a></li>
+          <li><a href="#d-18" data-num="18">Escape behavior</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">VI · Feedback</span>
+        <ol>
+          <li><a href="#d-19" data-num="19">Optimistic UI</a></li>
+          <li><a href="#d-20" data-num="20">Undo</a></li>
+          <li><a href="#d-21" data-num="21">Skeleton screens</a></li>
+          <li><a href="#d-22" data-num="22">Toasts</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">VII · Forms</span>
+        <ol>
+          <li><a href="#d-23" data-num="23">Validation on blur</a></li>
+          <li><a href="#d-24" data-num="24">Smart paste</a></li>
+          <li><a href="#d-25" data-num="25">Smart autofocus</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">VIII · State</span>
+        <ol>
+          <li><a href="#d-26" data-num="26">Scroll restoration</a></li>
+          <li><a href="#d-27" data-num="27">Empty states</a></li>
+          <li><a href="#d-28" data-num="28">Persistent selection</a></li>
+          <li><a href="#d-29" data-num="29">Streamed content</a></li>
+        </ol>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">IX · Native</span>
+        <ol>
+          <li><a href="#d-30" data-num="30">Haptic feedback</a></li>
+          <li><a href="#d-31" data-num="31">Density modes</a></li>
+        </ol>
+      </div>
+    </nav>
+  </aside>
+
+  <article class="article" id="article">
+
+    <header class="article-header">
+      <div class="article-kicker">Essay · March 2026</div>
+      <h1 class="article-title">Details that make interfaces <em>feel better.</em></h1>
+      <p class="article-deck">
+        A field study of thirty-one details, each one grounded in a real product you already use. Not claims. Observations.
+      </p>
+      <div class="article-byline">
+        <span class="author">Dani Asyrofi</span>
+        <span class="sep">·</span>
+        <span>~18 min read</span>
+        <span class="sep">·</span>
+        <span>v1.0</span>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p class="lede">
+      Great interfaces are rarely the product of a single brilliant decision. They are the product of thirty quiet ones, none of which the user will ever articulate, but all of which they can feel.
+    </p>
+
+    <p>
+      When a product feels right, the instinct is to credit the big things: the typography, the color system, the layout. Those are real. But they rarely account for the gap between a <em>fine</em> interface and one that users describe as <em>so clean,</em> or <em>so snappy,</em> or <em>so good.</em> That gap is almost always in the details.
+    </p>
+
+    <p>
+      This is a curated study of thirty-one such details. Every one of them is visible, right now, in a shipping product built by a team whose work you already respect. <strong>Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion, Superhuman, Framer.</strong> Wherever I could cite a specific feature you can open and see for yourself, I did. Where I could not back a claim with a real product, I dropped it.
+    </p>
+
+    <p>
+      The point is not to collect tricks. It is to build the taste for noticing. Once you see how a toast pauses on hover, or how a spinner is replaced with a skeleton shaped like the data it is waiting for, or how a play button is nudged two pixels right of geometric center, you will start to see the absence of those moves in the work around you. And then, mostly, in your own.
+    </p>
+
+    <p>
+      Read straight through, or jump between sections. Each section is independent. At the end, a few words on why details compound.
+    </p>
+
+    <!-- ════════════════════════════════════════════════
+         I · TYPOGRAPHY
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-typography"><span class="num">I</span>Typography</h2>
+    <p class="section-intro">
+      The layer where the interface stops being geometry and starts being language. Three details that separate typography that is present from typography that is tuned.
+    </p>
+
+    <section class="detail" id="d-01">
+      <div class="kicker">Detail 01</div>
+      <h3>Tabular numerals everywhere numbers change.</h3>
+      <p>
+        The digit <code>1</code> is narrower than the digit <code>8</code> in every well-designed proportional font. That is correct for reading prose and wrong for reading columns. Anywhere numbers are expected to change, align, or compare, they should occupy equal-width slots.
+      </p>
+      <p>
+        The effect of getting this wrong is almost invisible in isolation and deeply irritating in aggregate. Rows with changing counts shimmer. Columns of prices drift. Timers twitch every second. All of that disappears with a single declaration.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's issue list.</strong> Counts in the sidebar (issues per project, per cycle) are locked to tabular figures, so the layout never shifts when an issue is checked off and the count ticks down.</li>
+          <li><strong>Stripe Dashboard's payments table.</strong> Amounts align to the decimal point across the entire list because the typeface runs with <code>tnum</code> feature settings.</li>
+          <li><strong>Vercel Dashboard deployment list.</strong> Build durations (<code>1m 23s</code>, <code>42s</code>) stay rock-steady as numbers tick live during a deploy.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Set <code>font-variant-numeric: tabular-nums</code> on any element that displays counts, timers, prices, coordinates, or statistics. If your typeface supports it, pair with <code>slashed-zero</code> to kill zero-versus-O ambiguity.
+      </div>
+    </section>
+
+    <section class="detail" id="d-02">
+      <div class="kicker">Detail 02</div>
+      <h3><code>text-wrap: balance</code> for titles, <code>pretty</code> for prose.</h3>
+      <p>
+        A headline that ends with a single word orphaned on its own line reads as broken layout. Historically this was fixed with manual <code>&lt;br&gt;</code> tags, which inevitably broke the moment someone shipped a new breakpoint. The browser now does it correctly, at the line-break layer, across any viewport.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Vercel's marketing and changelog pages.</strong> Hero and section headings stay balanced across every viewport size.</li>
+          <li><strong>Stripe Docs page titles.</strong> Long doc titles like <em>Accept a payment with a custom checkout flow</em> never strand a word on a final short line.</li>
+          <li><strong>Linear's feature pages.</strong> Section headlines are always visually even, even when the content under them shifts.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> <code>text-wrap: balance</code> on headings. <code>text-wrap: pretty</code> on body prose (also guards against orphans but costs a little more to compute, so reserve it for paragraphs you care about).
+      </div>
+    </section>
+
+    <section class="detail" id="d-03">
+      <div class="kicker">Detail 03</div>
+      <h3>Font smoothing tuned to the medium.</h3>
+      <p>
+        Default font rendering on macOS is subpixel-antialiased and tends to render a quarter-stroke heavier than the type designer intended, especially for light-on-dark. Grayscale antialiasing makes glyphs look the way the designer drew them.
+      </p>
+      <p>
+        This is the single most-seen and least-understood CSS declaration in shipping design systems. Apply it once at the body level and every piece of type in the product gets cleaner.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear, Vercel, Raycast, Framer, and Arc.</strong> Every one of them ships with <code>-webkit-font-smoothing: antialiased</code> and <code>-moz-osx-font-smoothing: grayscale</code>. It is not a coincidence; it is the baseline.</li>
+          <li><strong>Apple's own web properties.</strong> Developer.apple.com and apple.com use the same pair on body.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong>
+<pre><code>body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}</code></pre>
+        Do not set it globally on icons or on very small type where the subpixel rendering actually helps.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         II · GEOMETRY
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-geometry"><span class="num">II</span>Geometry and space</h2>
+    <p class="section-intro">
+      Before a user reads a single word, their eye does geometry. These three rules decide whether the geometry is correct.
+    </p>
+
+    <section class="detail" id="d-04">
+      <div class="kicker">Detail 04</div>
+      <h3>Concentric border radius.</h3>
+      <p>
+        When a rounded rectangle is nested inside another rounded rectangle, the inner radius must equal the outer radius minus the gap between them. If the outer card is <code>16px</code> with <code>12px</code> of padding, the inner element is <code>4px</code>. Anything else creates non-parallel curves that the eye catches even when the mind does not.
+      </p>
+      <p>
+        This rule sounds like a suggestion and is actually a constant. Once the eye is trained on it, broken radii are the easiest interface bug to spot.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple's iOS home screen.</strong> App icons inside folders and inside the dock track the container's superellipse so every curve is parallel.</li>
+          <li><strong>Raycast's command list.</strong> The row corners, the window corners, and the modifier-key badges are all on the same center.</li>
+          <li><strong>Linear's cards and panels.</strong> Nested modal panels consistently reduce radius in proportion to their padding.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Treat radius and padding as linked tokens. <code>inner-radius = outer-radius − padding</code>. If you are in a Figma-native team, bind this in variables. If you are in code, this is a two-line helper.
+      </div>
+    </section>
+
+    <section class="detail" id="d-05">
+      <div class="kicker">Detail 05</div>
+      <h3>Optical alignment, not geometric alignment.</h3>
+      <p>
+        Asymmetric glyphs like a play triangle or an arrow look wrong when centered by bounding box. The triangle's visual mass is on its left edge, so geometric centering makes the shape feel pulled toward the left wall. Centering by eye, nudging one or two pixels right, is the fix. It is the one-pixel difference that elevates ordinary playback controls to Apple's.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple's play button</strong> in Music, QuickTime, and the iOS media controls. The triangle is offset right of geometric center.</li>
+          <li><strong>Raycast's action icons.</strong> Chevrons, arrows, and asymmetric glyphs in the action menu are baked with intentional visual padding.</li>
+          <li><strong>Figma's toolbar.</strong> Glyphs are aligned optically within their hit targets, never centered to raw bounds.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Bake the offset into the SVG asset (intentional padding inside the viewBox), not into flexbox. If you adjust in code, it is a per-icon <code>transform: translateX(0.5px)</code>. Never do it on the container.
+      </div>
+    </section>
+
+    <section class="detail" id="d-06">
+      <div class="kicker">Detail 06</div>
+      <h3>Pixel snapping and GPU compositing.</h3>
+      <p>
+        Animating <code>width</code>, <code>height</code>, <code>top</code>, or <code>left</code> triggers layout on every frame and renders at subpixel positions, which makes text look blurry the entire time the animation is running. Animating <code>transform</code> and <code>opacity</code> runs on the compositor, skips layout entirely, and stays crisp. At rest, snap back to integer pixels so idle type is sharp.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's modal and panel animations.</strong> Pure <code>translate3d</code> on the GPU. The text inside never blurs during a slide.</li>
+          <li><strong>Arc Browser's sidebar collapse.</strong> Transform-based; the page is never repainted during the animation.</li>
+          <li><strong>Apple.com product pages.</strong> Parallax and hero reveals are transform-and-opacity only.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Use <code>transform</code> and <code>opacity</code> for motion. Avoid <code>width</code>/<code>height</code>/<code>top</code>/<code>left</code>. Add <code>will-change: transform</code> before the animation and remove it after. Snap idle text to integer pixels by ensuring no ancestor has a fractional transform at rest.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         III · MOTION
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-motion"><span class="num">III</span>Motion</h2>
+    <p class="section-intro">
+      Motion is the thinnest layer between the user's intent and the interface's acknowledgment. Five rules that decide whether that acknowledgment feels like a product or a prototype.
+    </p>
+
+    <section class="detail" id="d-07">
+      <div class="kicker">Detail 07</div>
+      <h3>Spring physics for transforms. Eased curves for fades.</h3>
+      <p>
+        Cubic-bezier is the right tool for opacity and color, where there is no physical metaphor. For anything that moves through space, use a spring. Springs overshoot subtly and settle, which is what real objects do. It is the difference between motion that has been <em>stamped</em> and motion that feels <em>lived-in.</em>
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's command menu and right panels.</strong> Open and close motion is a spring with the smallest possible overshoot. Watch the trailing edge.</li>
+          <li><strong>Arc Browser's tab transitions and Easel.</strong> Tab pinning, sidebar collapse, workspace switching: all spring.</li>
+          <li><strong>Framer Motion's own canvas.</strong> Every drag, drop, and snap uses their own spring engine.</li>
+          <li><strong>iOS rubber-band scroll.</strong> The canonical example. The system the rest of the industry is modeled on.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> In Motion or Framer Motion: <code>transition={{ type: 'spring', stiffness: 400, damping: 30 }}</code>. On Apple platforms: <code>UISpringTimingParameters</code> or SwiftUI's <code>.spring(response:dampingFraction:)</code>. Start with stiffness around 300 to 500 and damping around 25 to 35 and tune by feel.
+      </div>
+    </section>
+
+    <section class="detail" id="d-08">
+      <div class="kicker">Detail 08</div>
+      <h3>Animations you can interrupt at any time.</h3>
+      <p>
+        If a user clicks again mid-animation, the new transition should start from the current position and current velocity, not snap back and replay from zero. Queued or restarting animations feel laggy and unresponsive. Interruptible motion feels like the interface is tracking your input in real time, because it is.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's sidebar toggle.</strong> Rapidly toggling the sidebar reverses from wherever the panel happens to be. It never snaps.</li>
+          <li><strong>Raycast's command window.</strong> The window resizes fluidly as you type, and every resize hands off cleanly to the next.</li>
+          <li><strong>Arc's command bar.</strong> Switching modes mid-animation never produces a jarring reset.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Framer Motion does this by default. CSS transitions handle it automatically when transitioning the same property. Keyframe animations restart on retrigger; avoid them for state-driven motion, or reset them with a JS read of <code>getComputedStyle</code> before replaying.
+      </div>
+    </section>
+
+    <section class="detail" id="d-09">
+      <div class="kicker">Detail 09</div>
+      <h3>Enter fast. Exit slow.</h3>
+      <p>
+        Symmetric enter and exit durations feel mechanical. Asymmetry communicates intent. Faster in than out signals <em>I am ready,</em> slower out than in signals <em>you can keep reading.</em> Pick the asymmetry that matches what the element is saying.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple's iOS sheet presentations.</strong> Present quickly (~300ms) and settle on dismissal (~400ms).</li>
+          <li><strong>Linear's toast notifications.</strong> Appear in ~150ms and fade out over ~300ms.</li>
+          <li><strong>Raycast's result list.</strong> Populates fast as you type, fades out slower on clear.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Different <code>duration</code> on enter and exit. In Framer Motion: separate <code>transition</code> objects on <code>initial</code>, <code>animate</code>, and <code>exit</code>.
+      </div>
+    </section>
+
+    <section class="detail" id="d-10">
+      <div class="kicker">Detail 10</div>
+      <h3><code>prefers-reduced-motion</code> that actually removes motion.</h3>
+      <p>
+        Users with vestibular sensitivities get nauseous from parallax and slides even at 100ms. <em>Reduced</em> motion means fade-or-instant, not the same animation a little faster. This is the accessibility detail that most design systems claim to honor and fewer actually do.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple across macOS and iOS.</strong> Every system animation has a reduced-motion variant; cross-fades replace slides throughout.</li>
+          <li><strong>GitHub.</strong> Respects the setting across the product (commit graphs, PR diffs, notification drawer).</li>
+          <li><strong>Stripe Docs.</strong> Reduced motion disables sidebar slide animations in favor of instant open.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong>
+<pre><code>@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}</code></pre>
+        The nicer approach is to swap transforms for opacity-only variants so motion survives in a form that cannot induce discomfort.
+      </div>
+    </section>
+
+    <section class="detail" id="d-11">
+      <div class="kicker">Detail 11</div>
+      <h3>View Transitions for in-page navigation.</h3>
+      <p>
+        Cross-fade or morph between views instead of hard-cutting. When the same element persists across routes (a thumbnail becoming a hero, a card becoming a detail page), animate it. Continuity tells the user <em>this is the same thing, zoomed in,</em> which is the strongest signal you can give that your app is coherent.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple.com product pages.</strong> Thumbnail-to-hero morphs on click.</li>
+          <li><strong>Arc Browser.</strong> Tab-to-page transitions.</li>
+          <li><strong>Chrome and iOS Safari.</strong> Ship native cross-document View Transitions, used by Apple on production pages.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong>
+<pre><code>document.startViewTransition(() => {
+  // update the DOM
+});</code></pre>
+        Mark the shared element with <code>view-transition-name: hero</code>. Falls back to a hard cut on unsupported browsers, which is fine.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         IV · SURFACES
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-surfaces"><span class="num">IV</span>Surfaces and depth</h2>
+    <p class="section-intro">
+      Two rules that decide whether a piece of UI reads as a physical object on a surface, or a flat rectangle on a page.
+    </p>
+
+    <section class="detail" id="d-12">
+      <div class="kicker">Detail 12</div>
+      <h3>Translucent chrome with <code>backdrop-filter</code>.</h3>
+      <p>
+        Overlays, sidebars, and toolbars read better as blurred translucent surfaces than as opaque fills. The translucency gives layers a sense of depth, and keeps users oriented to what sits behind the panel. It is the cue that says <em>this is floating, not replacing.</em>
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>macOS (Big Sur onward).</strong> Menu bar, sidebars, and Control Center. Vibrancy is the OS-level default.</li>
+          <li><strong>Apple's visionOS and the 2025 Liquid Glass design language.</strong> Pushes translucency to the system aesthetic; every chrome element is a literal glass material.</li>
+          <li><strong>Arc Browser's command bar.</strong> Blurred background over the page, never opaque.</li>
+          <li><strong>Raycast on macOS.</strong> The entire window is a vibrancy material.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong>
+<pre><code>backdrop-filter: blur(20px) saturate(180%);
+background: rgb(255 255 255 / 0.72);</code></pre>
+        Always provide an opaque fallback with <code>@supports not (backdrop-filter: blur(1px))</code>. Avoid translucent chrome over video backgrounds unless you can afford the cost.
+      </div>
+    </section>
+
+    <section class="detail" id="d-13">
+      <div class="kicker">Detail 13</div>
+      <h3>Border plus shadow. Rarely one without the other.</h3>
+      <p>
+        Pure borders feel flat and editorial. Pure shadows feel mushy on light backgrounds. A <code>1px</code> hairline border combined with a soft low-opacity shadow reads as a physical object resting on a surface. This is the single most common recipe in shipping design systems, and almost nobody gets it right on the first try.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's cards.</strong> Issues, projects, and modals. Hairline border plus faint shadow on every surface.</li>
+          <li><strong>Vercel Dashboard's deployment cards.</strong> Same recipe. Hairline plus soft shadow.</li>
+          <li><strong>Stripe's pricing page cards.</strong> Identical pattern, tuned for light bg.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong>
+<pre><code>border: 1px solid rgb(0 0 0 / 0.06);
+box-shadow:
+  0 1px 2px rgb(0 0 0 / 0.04),
+  0 4px 12px rgb(0 0 0 / 0.04);</code></pre>
+        In dark mode, replace the border with a top-edge highlight: <code>box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06)</code>. It reads as light catching the top of the card.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         V · INTERACTION
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-interaction"><span class="num">V</span>Interaction</h2>
+    <p class="section-intro">
+      Five details that decide whether the user feels in control of the interface, or at the mercy of it.
+    </p>
+
+    <section class="detail" id="d-14">
+      <div class="kicker">Detail 14</div>
+      <h3>Focus rings that belong to the brand.</h3>
+      <p>
+        Replace the browser's default outline with a designed focus ring, but never remove it. The default looks bolted on. A custom ring in the accent color signals that keyboard navigation is a first-class path, not an oversight.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear.</strong> Every interactive element gets a 2px brand ring with a 2px offset.</li>
+          <li><strong>Vercel's Geist design system.</strong> Focus is a doubled outline, inner ring in the surface color, outer ring in the accent. Works on any background.</li>
+          <li><strong>Stripe's checkout fields.</strong> Focus is a subtle ring plus a slight shadow elevation. Never just a blue outline.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Use <code>:focus-visible</code>, not <code>:focus</code>, so mouse clicks do not trigger the ring.
+<pre><code>:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="detail" id="d-15">
+      <div class="kicker">Detail 15</div>
+      <h3>Cmd+K as the primary navigation.</h3>
+      <p>
+        A single keyboard-summoned palette that searches, navigates, and triggers actions across the entire app. Power users reach ten-times speed. The palette also doubles as documentation: every action in your product becomes searchable by name, which means your app's surface area is discoverable without a manual.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's Cmd+K.</strong> Jumps to issues, cycles, and projects. Triggers actions like <em>Change status</em> and <em>Assign</em> inline.</li>
+          <li><strong>Raycast.</strong> The OS-level expression of the paradigm.</li>
+          <li><strong>Vercel Dashboard's Cmd+K.</strong> Navigates between projects, deployments, teams, and settings.</li>
+          <li><strong>Stripe Dashboard, Notion, Figma, Slack.</strong> All ship their own variant.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> <a class="link" href="https://cmdk.paco.me/" rel="noopener">cmdk by Paco Coursey</a> for React. Combine recent items, suggested actions, and live search into a single arrow-key-navigated list with fuzzy matching.
+      </div>
+    </section>
+
+    <section class="detail" id="d-16">
+      <div class="kicker">Detail 16</div>
+      <h3>Hover intent.</h3>
+      <p>
+        Do not open submenus or tooltips on <code>mouseenter</code>. Wait ~150ms, and only fire if the cursor is still pointed at the target. Without intent, dragging a cursor across a nav opens five menus in sequence. With it, only the menu you settled on opens.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple.com's mega-menu.</strong> Requires a brief settle before opening. Sliding the cursor across the top nav does not trigger any submenu until you stop.</li>
+          <li><strong>Linear's nested submenus.</strong> Hover-open only after the intent threshold.</li>
+          <li><strong>Notion's page hover-previews.</strong> ~300ms delay before the preview card materializes.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> <a class="link" href="https://www.radix-ui.com/primitives/docs/components/hover-card" rel="noopener">Radix UI's HoverCard</a> handles this. Custom: <code>setTimeout</code> on <code>mouseenter</code>, <code>clearTimeout</code> on <code>mouseleave</code>, only open if the timer survives.
+      </div>
+    </section>
+
+    <section class="detail" id="d-17">
+      <div class="kicker">Detail 17</div>
+      <h3>Tooltip delay, tiered by intent.</h3>
+      <p>
+        A tooltip that opens at <code>0ms</code> is noise. A tooltip that always waits <code>500ms</code> means scanning a toolbar takes forever. The tiered delay reads user intent: first tooltip opens after ~500ms, subsequent tooltips in the same toolbar open instantly as the cursor sweeps across.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Figma's toolbar.</strong> First tooltip waits, subsequent ones along the same toolbar appear instantly.</li>
+          <li><strong>Linear's icon buttons.</strong> Same pattern. Once the first tooltip is open, the others arrive instantly.</li>
+          <li><strong>macOS menu bar.</strong> The identical behavior at the OS level.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> <a class="link" href="https://www.radix-ui.com/primitives/docs/components/tooltip" rel="noopener">Radix Tooltip</a>: wrap your tree in <code>&lt;Tooltip.Provider delayDuration={500} skipDelayDuration={0} /&gt;</code>. The skip-delay is the detail that makes this feel right.
+      </div>
+    </section>
+
+    <section class="detail" id="d-18">
+      <div class="kicker">Detail 18</div>
+      <h3>Escape that always backs out exactly one layer.</h3>
+      <p>
+        Esc becomes a trusted <em>get me out</em> key only when it is never load-bearing in the wrong direction, and never ambiguous. First press closes the topmost modal. Second press closes the popover. Third press clears the search. Fourth press deselects. Never two layers at once, never destructive.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear.</strong> Esc closes the command menu, then filter popovers, then deselects issues. Each press is predictable.</li>
+          <li><strong>Figma.</strong> Esc deselects. Second press exits the current tool to the Move tool.</li>
+          <li><strong>Raycast.</strong> Esc backs out one navigation level inside an extension, then closes the window.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> An app-level focus/layer stack. The topmost overlay handles Esc and calls <code>stopPropagation</code> before lower layers can react. Radix's <code>&lt;Dialog&gt;</code> and <code>&lt;Popover&gt;</code> compose this correctly; prefer composing them to rolling your own.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         VI · FEEDBACK
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-feedback"><span class="num">VI</span>Feedback and speed</h2>
+    <p class="section-intro">
+      The gap between <em>snappy</em> and <em>laggy</em> is almost entirely here. Four details that decide how fast your product feels, independent of how fast it is.
+    </p>
+
+    <section class="detail" id="d-19">
+      <div class="kicker">Detail 19</div>
+      <h3>Optimistic UI commits.</h3>
+      <p>
+        Apply state changes locally before the server confirms; reconcile on response. This one detail is the difference between <em>snappy</em> and <em>laggy</em> for almost every interaction in a cloud product. The round-trip is invisible to the user. The rollback, if it comes, is rare enough to be handled with a toast.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear.</strong> The whole product is built on this. Status changes, assignments, comments all reflect instantly; the sync happens in the background.</li>
+          <li><strong>Superhuman.</strong> Archive, delete, snooze are instant. The keyboard shortcut commits before the server hears.</li>
+          <li><strong>Discord.</strong> Messages render in the channel before the websocket acknowledges them.</li>
+          <li><strong>Notion.</strong> Typing into a block commits immediately; conflicts resolve on the way back.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> TanStack Query's <code>useMutation</code> with <code>onMutate</code> for optimistic updates. SWR's <code>mutate</code> with rollback. Keep a transient pending flag for visual feedback on long-running actions.
+      </div>
+    </section>
+
+    <section class="detail" id="d-20">
+      <div class="kicker">Detail 20</div>
+      <h3>Undo as a first-class action.</h3>
+      <p>
+        Every destructive action surfaces an undo affordance for ~5 seconds before becoming permanent. Confidence comes from reversibility. <em>Are you sure?</em> dialogs interrupt flow. A short undo window protects without nagging.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Gmail's <em>Undo Send.</em></strong> Configurable delay up to 30 seconds; the feature that defined the category.</li>
+          <li><strong>Linear.</strong> Deleting an issue or archiving a cycle shows a toast with Undo for five seconds.</li>
+          <li><strong>Superhuman.</strong> Every command has Cmd+Z undo, including sent email within a configured delay window.</li>
+          <li><strong>Notion.</strong> Cmd+Z undoes block deletion, page archiving, and even drag operations.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Enqueue the destructive operation behind a <code>setTimeout</code>. Render a toast with an Undo button that cancels the timer. Persist the toast across route changes so users can still recover on nav.
+      </div>
+    </section>
+
+    <section class="detail" id="d-21">
+      <div class="kicker">Detail 21</div>
+      <h3>Skeleton screens shaped like the content.</h3>
+      <p>
+        While data loads, render gray placeholder rectangles that match the actual layout, not a centered spinner. Skeletons signal <em>your data is coming, here is the shape it will take.</em> Spinners signal <em>something is happening, no idea what.</em> The perceived-latency drop is measurable; the feel difference is immediate.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>YouTube.</strong> Thumbnail and metadata placeholders before the feed loads.</li>
+          <li><strong>Linear.</strong> Issue rows render as gray bars in the exact row geometry before the data hydrates.</li>
+          <li><strong>Vercel Dashboard.</strong> Deployment cards skeleton in with project-name, status, and branch shapes.</li>
+          <li><strong>LinkedIn.</strong> Originated the technique at scale on the feed.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Match real component dimensions. Use a subtle shimmer with a <code>linear-gradient</code> animated over 1.5 to 2 seconds. Do not shimmer too fast. Use <code>&lt;Skeleton className="h-4 w-32" /&gt;</code> from shadcn/ui or equivalent.
+      </div>
+    </section>
+
+    <section class="detail" id="d-22">
+      <div class="kicker">Detail 22</div>
+      <h3>Toasts that place predictably and pause on hover.</h3>
+      <p>
+        Toasts appear in a consistent corner, stack newest on top, auto-dismiss after ~5 seconds, and pause the timer whenever the cursor enters. Pause on hover is the small detail that means users can actually read the toast or click Undo before it vanishes.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's toasts.</strong> Bottom-right, swipe to dismiss, pause on hover.</li>
+          <li><strong>Vercel's deploy toasts.</strong> Bottom-right with progressive status updates and Undo baked in.</li>
+          <li><strong>Sonner</strong> by Emil Kowalski. Used by Vercel, Resend, and countless others. The canonical implementation.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Use <a class="link" href="https://sonner.emilkowal.ski/" rel="noopener">Sonner</a>. It handles stacking, swipe-to-dismiss, hover-pause, reduced-motion, and accessibility correctly out of the box.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         VII · FORMS
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-forms"><span class="num">VII</span>Forms</h2>
+    <p class="section-intro">
+      Forms are where most products ask the most of the user, and where most products give them the least. Three details that make forms feel like a conversation instead of an interrogation.
+    </p>
+
+    <section class="detail" id="d-23">
+      <div class="kicker">Detail 23</div>
+      <h3>Validate on blur, then live.</h3>
+      <p>
+        Validate when the user leaves a field, not on every keystroke. After the first error, switch to live validation so the user can see when they have fixed it. Errors that fire while the user is still typing their email feel accusatory. Blur-then-live feels like the system is patient.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Stripe's checkout (Stripe Elements).</strong> Card number errors appear only after blur, then update live as the user corrects.</li>
+          <li><strong>Apple ID signup.</strong> Password rules show live as you type; field-level errors fire on blur.</li>
+          <li><strong>Linear's settings forms.</strong> Same pattern throughout the product.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> React Hook Form: <code>mode: 'onTouched'</code>. Native: attach <code>blur</code> validation, then switch the same field to <code>input</code> validation once it is touched-and-invalid.
+      </div>
+    </section>
+
+    <section class="detail" id="d-24">
+      <div class="kicker">Detail 24</div>
+      <h3>Paste handling that reads the clipboard.</h3>
+      <p>
+        When a user pastes a URL, formatted text, or structured data, parse it and pre-fill the fields. Do not dump the raw string into one field and expect the user to clean it up. Smart paste feels like the app is reading your mind. The opposite feels like work.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's issue creation.</strong> Pasting a GitHub URL auto-attaches the issue or PR with title, status, and assignee.</li>
+          <li><strong>Notion's URL paste.</strong> Prompts you to paste as bookmark, embed, or plain URL, with sensible defaults by host.</li>
+          <li><strong>Notion Calendar (formerly Cron).</strong> Pasting a Zoom or Meet link into the location field parses it as a meeting URL.</li>
+          <li><strong>Figma's clipboard.</strong> Pasting CSS gradients or colors creates the equivalent fill.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Listen for the <code>paste</code> event. Read <code>clipboardData</code> for <code>text/uri-list</code>, <code>text/html</code>, JSON, or domain patterns you know how to parse. Call <code>preventDefault</code> and route the parsed payload into the right fields.
+      </div>
+    </section>
+
+    <section class="detail" id="d-25">
+      <div class="kicker">Detail 25</div>
+      <h3>Autofocus the first useful field.</h3>
+      <p>
+        When a modal opens, the caret should already be in the field the user came to fill. Not on the label, not on the close button, not nowhere. Save a tab keystroke on every open. But do not autofocus on initial page load, where it traps screen readers and hijacks the expected scroll position.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's Create issue modal.</strong> Focus drops into the title field the instant the modal opens.</li>
+          <li><strong>Raycast on launch.</strong> Focuses the search input, which is the right call here because it is the only useful target.</li>
+          <li><strong>Notion's New page.</strong> Caret lives in the title.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> <code>autoFocus</code> on the input, or imperatively <code>inputRef.current?.focus()</code> after mount. Pair with <code>:focus-visible</code> so the ring only renders for keyboard users.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         VIII · STATE
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-state"><span class="num">VIII</span>State and navigation</h2>
+    <p class="section-intro">
+      Interfaces fail quietly the moment they forget where the user was. Four details about remembering.
+    </p>
+
+    <section class="detail" id="d-26">
+      <div class="kicker">Detail 26</div>
+      <h3>Scroll restoration on back navigation.</h3>
+      <p>
+        When users navigate back, return them to the exact scroll position they left from. Users mentally bookmark <em>I was here.</em> Resetting scroll on back-nav is the single biggest reason an SPA feels worse than a traditional MPA, and the fix is almost always a one-line config.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Apple.com.</strong> Deep product pages preserve exact scroll on browser back.</li>
+          <li><strong>Stripe Docs.</strong> Navigating into an API reference and back keeps you where you were.</li>
+          <li><strong>Notion.</strong> Bouncing between pages restores scroll on back.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> The native browser does this with full-page navigation and back/forward cache. SPAs must opt in: Next.js App Router has <code>experimental.scrollRestoration</code>. React Router ships <code>&lt;ScrollRestoration /&gt;</code>. For virtualized lists, persist scroll via TanStack Virtual or equivalent; they handle this case correctly.
+      </div>
+    </section>
+
+    <section class="detail" id="d-27">
+      <div class="kicker">Detail 27</div>
+      <h3>Empty states with a primary action.</h3>
+      <p>
+        First-run and empty views should show what could be there plus a single button to make it happen. Never just <em>No items yet.</em> Empty states are the most-seen part of new-user flows. A blank panel says <em>the product is broken or boring.</em> A pointed CTA says <em>here is exactly what to do.</em>
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's <em>No issues</em> state.</strong> Shows an illustration plus a <em>Create issue</em> CTA with the keyboard shortcut hint.</li>
+          <li><strong>Notion's blank page.</strong> Ghost prompt <em>Type / for commands</em> with a suggested list of templates.</li>
+          <li><strong>Vercel's empty project list.</strong> <em>Import Git Repository</em> CTA with shortcuts to common templates.</li>
+          <li><strong>Figma's empty file.</strong> Surface the keyboard shortcut for rectangle, text, frame.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Treat empty state as a designed surface with hierarchy. Short title. One-sentence <em>why.</em> Primary CTA. Keyboard shortcut hint. Optional illustration. Never a blank rectangle.
+      </div>
+    </section>
+
+    <section class="detail" id="d-28">
+      <div class="kicker">Detail 28</div>
+      <h3>Selection that survives re-renders.</h3>
+      <p>
+        When data refreshes, keep the user's selection, scroll position, expanded sections, and active filters intact. Few things feel worse than losing your place because a parent component re-rendered on a real-time update. Persistent UI state is invisible when it works and infuriating when it does not.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's issue list.</strong> Live updates from teammates do not blow away your current selection or filter.</li>
+          <li><strong>Figma's layers panel.</strong> Collaboration updates do not collapse your tree expansion.</li>
+          <li><strong>Notion's sidebar.</strong> Real-time page creation by others preserves your expanded pages.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Keep selection in a ref or external store (Zustand, Jotai) keyed by stable IDs, not by index. Use stable <code>key</code> props on list items. Persist scroll separately from selection.
+      </div>
+    </section>
+
+    <section class="detail" id="d-29">
+      <div class="kicker">Detail 29</div>
+      <h3>Stream what you have. Let the slow data land later.</h3>
+      <p>
+        Render the shell and any cached or fast data immediately. Let slow data stream in as it arrives. Time-to-first-meaningful-paint matters more than time-to-fully-loaded. Streaming makes the product feel responsive even when individual queries are slow.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Vercel's dashboard.</strong> Project metadata renders instantly; deployment status streams in via React Server Components and Suspense.</li>
+          <li><strong>Linear's app.</strong> Issue list paints from local cache first; server reconciles in the background.</li>
+          <li><strong>v0.dev.</strong> Generated code streams token-by-token. The chrome is interactive immediately.</li>
+          <li><strong>ChatGPT and Claude.</strong> The response stream is the canonical user-facing example.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> React Suspense with streaming SSR (Next.js App Router is the easiest path). For data, layer a local-first cache (IndexedDB via Dexie, or a sync engine modeled on Linear's) underneath network fetches.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         IX · NATIVE
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-native"><span class="num">IX</span>The feel of native</h2>
+    <p class="section-intro">
+      Two details that sit outside the DOM and show up anyway as taste.
+    </p>
+
+    <section class="detail" id="d-30">
+      <div class="kicker">Detail 30</div>
+      <h3>Haptic feedback on touch devices.</h3>
+      <p>
+        Touch screens have no physical click. A <code>10ms</code> haptic tap restores the feedback loop that your hand expects from a button. Pair micro-interactions like toggle flips, tab switches, and segmented control changes with a soft tap. Reserve heavy haptics for confirmations.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>iOS toggle switches and segmented controls.</strong> Every flip plays a light impact generator.</li>
+          <li><strong>Apple's Camera.</strong> Heavy haptic on shutter capture, light on zoom snap.</li>
+          <li><strong>Linear's iOS app.</strong> Completing an issue plays a soft tap.</li>
+          <li><strong>Things 3 by Cultured Code.</strong> Checking off a todo has a satisfying haptic flick.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> iOS: <code>UIImpactFeedbackGenerator</code>, <code>UISelectionFeedbackGenerator</code>, <code>UINotificationFeedbackGenerator</code>. Web: <code>navigator.vibrate(10)</code> (Android only; quiet failure on iOS). Reserve heavy impact for confirmations, light for selection.
+      </div>
+    </section>
+
+    <section class="detail" id="d-31">
+      <div class="kicker">Detail 31</div>
+      <h3>Density modes. Comfortable for new, compact for daily.</h3>
+      <p>
+        Let power users choose tighter row heights. Default new users to comfortable. Density is a personal preference that scales with experience. New users want breathing room; daily users want fifty rows on screen. Forcing either is a tax on the other.
+      </p>
+      <div class="wild">
+        <span class="wild-label">In the wild</span>
+        <ul>
+          <li><strong>Linear's display options.</strong> Row density, sidebar size, theme, all adjustable per view.</li>
+          <li><strong>Gmail's display density</strong> (Default, Comfortable, Compact). The canonical implementation.</li>
+          <li><strong>Notion's <em>Toggle small text.</em></strong> Page-level density toggle.</li>
+          <li><strong>Notion Calendar.</strong> Zoom level on the day view scales row height fluidly.</li>
+        </ul>
+      </div>
+      <div class="how">
+        <strong>How.</strong> Tokenize spacing (<code>--row-h: 12px</code> vs <code>8px</code>) and let it cascade. Persist the user's choice in localStorage or the user record.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════
+         CLOSE
+         ════════════════════════════════════════════════ -->
+    <section class="article-close">
+      <h2>Details compound.</h2>
+      <p>
+        None of the details above is novel. Every one of them has been described before, probably better, on someone else's blog. What is rarer is the willingness to sit with thirty of them, trace each to a real product, and build the taste for noticing them in your own work.
+      </p>
+      <p>
+        The interfaces that feel great are rarely the result of one obvious move. They are the result of a team that got all thirty of these decisions right, and then got the next thirty right after that. This essay is a starting list. The real work is what happens after you start seeing these details everywhere, including in the gaps where you have not shipped them yet.
+      </p>
+      <p>
+        If you build software and you want your users to use the word <em>feel,</em> this is the layer to study.
+      </p>
+
+      <div class="signature">Dani Asyrofi, Jakarta, March 2026.</div>
+
+      <div class="article-next">
+        <span class="article-next-meta">End of essay</span>
+        <a href="/" class="article-next-home">
+          Back to portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </article>
+
+</div>
+
+<footer>
+  <span>© <span id="year">2026</span> Muhammad Dani Asyrofi · Jakarta</span>
+  <span class="colophon">Instrument Serif, Geist, and Geist Mono. All products and features cited are observations from public, shipping interfaces as of March 2026.</span>
+</footer>
+
+<script type="module">
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// YEAR
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// THEME
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeToggle');
+
+const getInitialTheme = () => {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light' || saved === 'dark') return saved;
+  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+const setTheme = (t) => {
+  root.classList.add('theme-swap');
+  root.setAttribute('data-theme', t);
+  try { localStorage.setItem('theme', t); } catch {}
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-swap')));
+};
+setTheme(getInitialTheme());
+
+themeBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  if (!document.startViewTransition || prefersReduced) { setTheme(next); return; }
+  document.startViewTransition(() => setTheme(next));
+});
+
+// NAV scroll
+const nav = document.querySelector('.nav');
+let scrolled = false;
+const updateNav = () => {
+  const s = window.scrollY > 8;
+  if (s !== scrolled) { nav.classList.toggle('scrolled', s); scrolled = s; }
+};
+updateNav();
+window.addEventListener('scroll', updateNav, { passive: true });
+
+// TOC active
+const tocLinks = document.querySelectorAll('.toc a');
+const tocMap = {};
+tocLinks.forEach(a => {
+  const id = a.getAttribute('href').slice(1);
+  tocMap[id] = a;
+});
+const setActiveToc = (id) => {
+  tocLinks.forEach(a => a.classList.toggle('active', a === tocMap[id]));
+};
+const tocIO = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) setActiveToc(e.target.id);
+  }
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+document.querySelectorAll('.detail').forEach(d => tocIO.observe(d));
+
+// Reveal
+if (!prefersReduced) {
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        io.unobserve(e.target);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          e.target.classList.add('is-in');
+        }));
+      }
+    }
+  }, { threshold: 0, rootMargin: '0px 0px -48px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+}
+</script>
+
+</body>
+</html>
