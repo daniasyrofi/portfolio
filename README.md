@@ -123,12 +123,16 @@ python3 /tmp/gen_assets.py   # See the original script if you need to change bra
 
 ## Tech notes
 
-- Typography: Instrument Serif (display), Geist (body), Geist Mono (utility)
-- Dark mode: follows system preference, persists user override in `localStorage`
-- Animation: CSS only, respects `prefers-reduced-motion`
-- Responsive: mobile first, breakpoints at 540px and 960px
-- No tracking, no analytics. Add [Plausible](https://plausible.io) or [Fathom](https://usefathom.com) if desired.
-- Security: CSP, HSTS, X-Frame-Options, Permissions-Policy — see `netlify.toml`.
+- **Typography**: Instrument Serif (display), Geist (body), Geist Mono (utility)
+- **Dark mode**: follows system preference, persists user override in `localStorage`, theme swap uses the View Transitions API with a short "disable transitions" window (Paco pattern)
+- **Smooth scroll**: Lenis, loaded dynamically from esm.sh only on fine-pointer devices
+- **Animation**: CSS keyframes + IntersectionObserver for reveals, all guarded by `prefers-reduced-motion`
+- **Cursor spotlight**: subtle warm radial gradient follows the pointer (light mode feels warmer, dark mode feels alive). Disabled on touch and reduced-motion.
+- **Writing**: Medium posts auto-fetched via `rss2json` on page load, with a 3-item fallback list baked in so the section never goes empty.
+- **Responsive**: mobile first, breakpoints at 540px and 960px
+- **Accessibility**: skip link, focus rings on `:focus-visible`, `aria-label` on all icon-only buttons and controls, colour contrast AA+
+- **No tracking, no analytics**. Add [Plausible](https://plausible.io) or [Fathom](https://usefathom.com) if desired.
+- **Security**: CSP, HSTS, X-Frame-Options, Permissions-Policy — see `netlify.toml`.
 
 ## Credits
 
