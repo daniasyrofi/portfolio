@@ -1,0 +1,39 @@
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.sublime-*
+.history/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Netlify local dev
+.netlify/
+.cache/
+
+# macOS metadata
+._*
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp

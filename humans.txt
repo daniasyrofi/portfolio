@@ -1,0 +1,15 @@
+/* TEAM */
+Designer & Author: Muhammad Dani Asyrofi
+Site: https://daniasyrofi.com
+Location: Jakarta, Indonesia
+
+/* THANKS */
+Typography: Instrument Serif, Geist, Geist Mono (Google Fonts)
+Hosting: Netlify
+Inspiration: Jakub Krehel, Emil Kowalski, Rauno Freiberg, Brittany Chiang, Olivia Ng
+
+/* SITE */
+Last update: 2026/04/25
+Language: English
+Standards: HTML5, CSS3, JavaScript
+Build: Hand crafted, no framework, no build step
