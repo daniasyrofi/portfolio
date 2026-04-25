@@ -899,6 +899,247 @@ pre code {
   .demo-tag { font-size: 9px; top: 8px; left: 12px; }
 }
 
+/* Interactive controls shared across demos */
+.demo-col--full { grid-column: 1 / -1; min-height: auto; }
+.demo-col--controls {
+  align-items: stretch;
+  padding: 24px 20px;
+  gap: 18px;
+  justify-content: flex-start;
+}
+
+.demo-btn {
+  padding: 7px 14px;
+  background: var(--bg-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 11.5px; font-weight: 450;
+  font-family: var(--ff-sans);
+  cursor: pointer;
+  letter-spacing: -0.003em;
+  transition: background 200ms var(--ease-out-expo), border-color 200ms var(--ease-out-expo), transform 200ms var(--ease-out-expo);
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+}
+.demo-btn:hover {
+  background: var(--bg-sunken);
+  border-color: var(--line-strong);
+}
+.demo-btn:active { transform: translateY(1px); }
+.demo-btn.is-primary {
+  background: var(--ink); color: var(--bg); border-color: var(--ink);
+}
+.demo-btn.is-primary:hover {
+  background: var(--ink-2); border-color: var(--ink-2);
+}
+.demo-btn svg { width: 10px; height: 10px; }
+
+.demo-controls {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  display: inline-flex; align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.toggle input {
+  position: absolute; opacity: 0; pointer-events: none;
+  width: 100%; height: 100%;
+}
+.toggle-track {
+  width: 34px; height: 20px;
+  background: var(--line-strong);
+  border-radius: 999px;
+  position: relative;
+  transition: background 220ms var(--ease-out-expo);
+}
+.toggle-thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toggle input:checked + .toggle-track {
+  background: var(--accent);
+}
+.toggle input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(14px);
+}
+.toggle input:focus-visible + .toggle-track {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.toggle-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--ff-sans);
+  width: 100%;
+  max-width: 260px;
+}
+.demo-toggle-label {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.toggle-group {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 16px;
+}
+
+/* Slider */
+.slider-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  align-items: center;
+  font-family: var(--ff-sans);
+  width: 100%;
+  max-width: 280px;
+}
+.slider-row label {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  grid-column: 1;
+}
+.slider-row output {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+  min-width: 52px;
+}
+.slider {
+  grid-column: 1 / -1;
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px;
+  background: var(--line-strong);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px;
+  background: var(--ink);
+  border-radius: 50%;
+  border: 2px solid var(--bg-raised);
+  box-shadow: 0 0 0 1px var(--line-strong);
+  cursor: grab;
+  transition: transform 200ms var(--ease-out-expo);
+}
+.slider::-webkit-slider-thumb:active { transform: scale(1.15); cursor: grabbing; }
+.slider::-moz-range-thumb {
+  width: 16px; height: 16px;
+  background: var(--ink);
+  border-radius: 50%;
+  border: 2px solid var(--bg-raised);
+  box-shadow: 0 0 0 1px var(--line-strong);
+  cursor: grab;
+}
+.slider:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Formula display */
+.demo-formula {
+  font-family: var(--ff-mono);
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  text-align: center;
+  padding: 10px 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  letter-spacing: -0.003em;
+  font-variant-numeric: tabular-nums;
+}
+.demo-formula strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.demo-formula .ok { color: var(--accent); }
+.demo-formula .bad { color: #c23b22; }
+[data-theme="dark"] .demo-formula .bad { color: #ff7a5c; }
+
+/* Concentric radius live demo */
+.radius-live {
+  width: 120px; height: 120px;
+  background: var(--accent-soft);
+  display: grid; place-items: center;
+  border-radius: var(--r-outer, 16px);
+  padding: var(--r-pad, 12px);
+  transition: border-radius 180ms var(--ease-out-expo), padding 180ms var(--ease-out-expo);
+}
+.radius-live .radius-inner {
+  width: 100%; height: 100%;
+  background: var(--accent);
+  border-radius: var(--r-inner, 4px);
+  transition: border-radius 180ms var(--ease-out-expo);
+}
+
+/* Optical live demo */
+.tri--live polygon {
+  transform: translateX(var(--tri-offset, 0px));
+  transition: transform 180ms var(--ease-out-expo);
+}
+
+/* Border + shadow live card */
+.card-live {
+  width: 100%;
+  padding: 36px 24px;
+  border-radius: 12px;
+  background: var(--bg-raised);
+  text-align: center;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink);
+  transition: border-color 220ms var(--ease-out-expo), box-shadow 220ms var(--ease-out-expo);
+  border: 1px solid transparent;
+}
+.card-live[data-border="1"] { border-color: var(--line-strong); }
+.card-live[data-shadow="1"] {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 8px 24px rgb(0 0 0 / 0.08);
+}
+[data-theme="dark"] .card-live[data-shadow="1"] {
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.04) inset,
+    0 12px 32px rgb(0 0 0 / 0.4);
+}
+.card-live[data-border="1"][data-shadow="1"] {
+  border-color: var(--line);
+}
+
+/* Tick counter custom label */
+.demo-tick-label {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+
 /* ══════════════════════════════════════════════════════════════════
    TABLE OF CONTENTS (sticky desktop)
    ══════════════════════════════════════════════════════════════════ */
@@ -1260,15 +1501,25 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
           <div class="demo-col">
             <span class="demo-tag">Proportional</span>
             <div class="demo-num demo-num--prop" id="demoCountProp">111</div>
-            <span class="demo-note">Notice the left edge drift</span>
+            <span class="demo-note">Left edge drifts</span>
           </div>
           <div class="demo-col">
             <span class="demo-tag">Tabular</span>
             <div class="demo-num demo-num--tab" id="demoCountTab">111</div>
-            <span class="demo-note">Edge stays locked</span>
+            <span class="demo-note">Edge locked</span>
           </div>
         </div>
-        <figcaption>The counters tick in sync. Watch the leftmost digit as it flips between 1 and 0.</figcaption>
+        <div class="demo-stage" style="padding: 14px 28px; border-top: 1px solid var(--line);">
+          <div class="demo-controls">
+            <button class="demo-btn is-primary" id="tickPlay" aria-label="Play or pause">
+              <svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true" id="tickPlayIcon"><rect x="2" y="1" width="2" height="8"/><rect x="6" y="1" width="2" height="8"/></svg>
+              <span id="tickPlayLabel">Pause</span>
+            </button>
+            <button class="demo-btn" id="tickNext">Next tick</button>
+            <button class="demo-btn" id="tickReset">Reset</button>
+          </div>
+        </div>
+        <figcaption>Click Next tick to advance one step. The counters go 111 → 108 → 118 → 110 → 101 → 111. Watch the leftmost digit.</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -1290,18 +1541,24 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
         A headline that ends with a single word orphaned on its own line reads as broken layout. Historically this was fixed with manual <code>&lt;br&gt;</code> tags, which inevitably broke the moment someone shipped a new breakpoint. The browser now does it correctly, at the line-break layer, across any viewport.
       </p>
       <figure class="demo">
-        <div class="demo-stage demo-stage--2col">
+        <div class="demo-stage demo-stage--stack">
           <div class="demo-col">
-            <span class="demo-tag">Default</span>
-            <h4 class="demo-heading">Details that make interfaces feel better</h4>
-            <span class="demo-note">Trailing word orphaned</span>
-          </div>
-          <div class="demo-col">
-            <span class="demo-tag">text-wrap: balance</span>
-            <h4 class="demo-heading demo-heading--balance">Details that make interfaces feel better</h4>
-            <span class="demo-note">Lines visually even</span>
+            <span class="demo-tag" id="wrapStateTag">text-wrap: balance</span>
+            <h4 class="demo-heading demo-heading--balance" id="demoWrap">Details that make interfaces feel better when you get them right</h4>
           </div>
         </div>
+        <div class="demo-stage" style="padding: 14px 28px; border-top: 1px solid var(--line);">
+          <div class="demo-controls">
+            <div class="toggle-row" style="justify-content: center; max-width: none; gap: 12px;">
+              <span class="demo-toggle-label">Balance</span>
+              <label class="toggle">
+                <input type="checkbox" id="wrapToggle" checked>
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <figcaption>Flip the toggle. The same heading swings between default wrap (trailing word alone) and balanced (lines visually even).</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -1363,17 +1620,32 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <figure class="demo">
         <div class="demo-stage demo-stage--2col">
           <div class="demo-col">
-            <span class="demo-tag">Off by the padding</span>
-            <div class="radius-demo radius-demo--bad"><div class="radius-inner"></div></div>
-            <span class="demo-note">Outer 16 · Inner 16 · Curves fight</span>
+            <span class="demo-tag">Live preview</span>
+            <div class="radius-live" id="radiusLive" style="--r-outer: 16px; --r-pad: 12px; --r-inner: 4px;">
+              <div class="radius-inner"></div>
+            </div>
+            <div class="demo-formula" id="radiusFormula"><strong>Outer 16</strong> − <strong>Pad 12</strong> = <strong class="ok">Inner 4</strong> ✓</div>
           </div>
-          <div class="demo-col">
-            <span class="demo-tag">Concentric</span>
-            <div class="radius-demo radius-demo--good"><div class="radius-inner"></div></div>
-            <span class="demo-note">Outer 16 · Inner 2 · Curves parallel</span>
+          <div class="demo-col demo-col--controls">
+            <div class="slider-row">
+              <label>Outer radius</label>
+              <output id="rOuterV">16</output>
+              <input type="range" min="0" max="28" step="1" value="16" id="rOuter" class="slider" aria-label="Outer radius in pixels">
+            </div>
+            <div class="slider-row">
+              <label>Padding</label>
+              <output id="rPadV">12</output>
+              <input type="range" min="0" max="22" step="1" value="12" id="rPad" class="slider" aria-label="Padding in pixels">
+            </div>
+            <div class="slider-row">
+              <label>Inner radius</label>
+              <output id="rInnerV">4</output>
+              <input type="range" min="0" max="28" step="1" value="4" id="rInner" class="slider" aria-label="Inner radius in pixels">
+            </div>
+            <button class="demo-btn" id="rMatch">Match the formula</button>
           </div>
         </div>
-        <figcaption>Look along the top-left corner of the inner shape. On the right, the inner curve tracks the outer curve. On the left, it collides with it.</figcaption>
+        <figcaption>Slide Outer and Padding. The formula says Inner should equal Outer − Padding. Now drag Inner off the correct value and watch the curves fight.</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -1397,21 +1669,27 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <figure class="demo">
         <div class="demo-stage demo-stage--2col">
           <div class="demo-col">
-            <span class="demo-tag">Geometric center</span>
+            <span class="demo-tag">Adjust offset</span>
             <div class="play-btn">
-              <svg class="tri tri--geo" viewBox="0 0 24 24"><polygon points="7,4 21,12 7,20"/></svg>
+              <svg class="tri tri--live" viewBox="0 0 24 24" id="triLive" style="--tri-offset: 0px;"><polygon points="7,4 21,12 7,20"/></svg>
             </div>
-            <span class="demo-note">Feels pulled left</span>
+            <span class="demo-note" id="triVerdict">Geometric center. Feels pulled left.</span>
           </div>
-          <div class="demo-col">
-            <span class="demo-tag">Optical center</span>
-            <div class="play-btn">
-              <svg class="tri tri--opt" viewBox="0 0 24 24"><polygon points="7,4 21,12 7,20"/></svg>
+          <div class="demo-col demo-col--controls" style="justify-content: center;">
+            <div class="slider-row" style="max-width: 220px; margin: 0 auto;">
+              <label>Horizontal offset</label>
+              <output id="triV">+0.0px</output>
+              <input type="range" min="-2" max="4" step="0.2" value="0" id="triSlider" class="slider" aria-label="Horizontal offset in pixels">
             </div>
-            <span class="demo-note">Balanced by eye</span>
+            <div class="demo-controls">
+              <button class="demo-btn" data-tri="0">0px</button>
+              <button class="demo-btn" data-tri="1">+1px</button>
+              <button class="demo-btn is-primary" data-tri="1.8">+1.8px</button>
+              <button class="demo-btn" data-tri="3">+3px</button>
+            </div>
           </div>
         </div>
-        <figcaption>Same triangle, nudged ~2 pixels right. The eye stops noticing the shape and starts trusting the button.</figcaption>
+        <figcaption>Drag the slider or jump to presets. Between +1.5 and +2 px the triangle clicks into balance. Before that it leans. After it lists right.</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -1613,24 +1891,37 @@ background: rgb(255 255 255 / 0.72);</code></pre>
         Pure borders feel flat and editorial. Pure shadows feel mushy on light backgrounds. A <code>1px</code> hairline border combined with a soft low-opacity shadow reads as a physical object resting on a surface. This is the single most common recipe in shipping design systems, and almost nobody gets it right on the first try.
       </p>
       <figure class="demo">
-        <div class="demo-stage demo-stage--3col">
+        <div class="demo-stage demo-stage--2col">
           <div class="demo-col">
-            <span class="demo-tag">Border only</span>
-            <div class="card-sample card-sample--border">Hello.</div>
-            <span class="demo-note">Flat. Editorial.</span>
+            <span class="demo-tag">Live card</span>
+            <div class="card-live" id="cardLive" data-border="0" data-shadow="0">Hello.</div>
+            <span class="demo-note" id="cardVerdict">Neither. Floats nowhere.</span>
           </div>
-          <div class="demo-col">
-            <span class="demo-tag">Shadow only</span>
-            <div class="card-sample card-sample--shadow">Hello.</div>
-            <span class="demo-note">Floating but soft</span>
-          </div>
-          <div class="demo-col">
-            <span class="demo-tag">Both</span>
-            <div class="card-sample card-sample--both">Hello.</div>
-            <span class="demo-note">Object on a surface</span>
+          <div class="demo-col demo-col--controls" style="justify-content: center;">
+            <div class="toggle-group">
+              <div class="toggle-row">
+                <span class="demo-toggle-label">Border</span>
+                <label class="toggle">
+                  <input type="checkbox" id="cardBorderTog">
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <span class="demo-toggle-label">Shadow</span>
+                <label class="toggle">
+                  <input type="checkbox" id="cardShadowTog">
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+            <div class="demo-controls" style="margin-top: 12px;">
+              <button class="demo-btn" data-card="border">Border only</button>
+              <button class="demo-btn" data-card="shadow">Shadow only</button>
+              <button class="demo-btn is-primary" data-card="both">Both</button>
+            </div>
           </div>
         </div>
-        <figcaption>Same card, three recipes. The combined version reads as an object the user could pick up.</figcaption>
+        <figcaption>Flip the toggles. Border alone reads editorial, shadow alone reads mushy, both together read as a physical object on a surface.</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -2236,19 +2527,199 @@ if (!prefersReduced) {
 // DEMOS
 // ════════════════════════════════════════════════════════════════════
 
-// Demo 1: Tabular numerals ticker
+// Demo 1: Tabular numerals ticker with controls
 (() => {
   const prop = document.getElementById('demoCountProp');
   const tab = document.getElementById('demoCountTab');
-  if (!prop || !tab) return;
+  const playBtn = document.getElementById('tickPlay');
+  const playIcon = document.getElementById('tickPlayIcon');
+  const playLabel = document.getElementById('tickPlayLabel');
+  const nextBtn = document.getElementById('tickNext');
+  const resetBtn = document.getElementById('tickReset');
+  if (!prop || !tab || !playBtn) return;
+
   const values = [111, 108, 118, 110, 101, 111];
   let i = 0;
-  setInterval(() => {
-    i = (i + 1) % values.length;
+  let playing = true;
+  let timer = 0;
+
+  const apply = () => {
     const v = String(values[i]);
     prop.textContent = v;
     tab.textContent = v;
-  }, 900);
+  };
+  const tick = () => { i = (i + 1) % values.length; apply(); };
+  const start = () => { stop(); timer = setInterval(tick, 1100); };
+  const stop = () => { if (timer) clearInterval(timer); timer = 0; };
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const makePauseGlyph = () => {
+    const f = document.createDocumentFragment();
+    [2, 6].forEach(x => {
+      const r = document.createElementNS(SVG_NS, 'rect');
+      r.setAttribute('x', String(x));
+      r.setAttribute('y', '1');
+      r.setAttribute('width', '2');
+      r.setAttribute('height', '8');
+      f.appendChild(r);
+    });
+    return f;
+  };
+  const makePlayGlyph = () => {
+    const p = document.createElementNS(SVG_NS, 'polygon');
+    p.setAttribute('points', '2,1 8,5 2,9');
+    return p;
+  };
+  const setIcon = (isPlaying) => {
+    while (playIcon.firstChild) playIcon.removeChild(playIcon.firstChild);
+    playIcon.appendChild(isPlaying ? makePauseGlyph() : makePlayGlyph());
+    playLabel.textContent = isPlaying ? 'Pause' : 'Play';
+  };
+
+  playBtn.addEventListener('click', () => {
+    playing = !playing;
+    setIcon(playing);
+    if (playing) start(); else stop();
+  });
+  nextBtn.addEventListener('click', () => {
+    if (playing) { playing = false; setIcon(false); stop(); }
+    tick();
+  });
+  resetBtn.addEventListener('click', () => { i = 0; apply(); });
+
+  apply();
+  start();
+})();
+
+// Demo 2: text-wrap balance toggle
+(() => {
+  const toggle = document.getElementById('wrapToggle');
+  const heading = document.getElementById('demoWrap');
+  const tag = document.getElementById('wrapStateTag');
+  if (!toggle || !heading) return;
+  const sync = () => {
+    const on = toggle.checked;
+    heading.classList.toggle('demo-heading--balance', on);
+    tag.textContent = on ? 'text-wrap: balance' : 'Default wrap';
+  };
+  toggle.addEventListener('change', sync);
+  sync();
+})();
+
+// Demo 4: Concentric radius live
+(() => {
+  const live = document.getElementById('radiusLive');
+  const formula = document.getElementById('radiusFormula');
+  const rOuter = document.getElementById('rOuter');
+  const rPad = document.getElementById('rPad');
+  const rInner = document.getElementById('rInner');
+  const rOuterV = document.getElementById('rOuterV');
+  const rPadV = document.getElementById('rPadV');
+  const rInnerV = document.getElementById('rInnerV');
+  const match = document.getElementById('rMatch');
+  if (!live || !rOuter) return;
+
+  const mkStrong = (text, cls) => {
+    const s = document.createElement('strong');
+    if (cls) s.className = cls;
+    s.textContent = text;
+    return s;
+  };
+
+  const sync = () => {
+    const o = +rOuter.value;
+    const p = +rPad.value;
+    const inn = +rInner.value;
+    const expected = Math.max(0, o - p);
+    live.style.setProperty('--r-outer', o + 'px');
+    live.style.setProperty('--r-pad', p + 'px');
+    live.style.setProperty('--r-inner', inn + 'px');
+    rOuterV.textContent = o;
+    rPadV.textContent = p;
+    rInnerV.textContent = inn;
+    const ok = inn === expected;
+
+    while (formula.firstChild) formula.removeChild(formula.firstChild);
+    formula.appendChild(mkStrong('Outer ' + o));
+    formula.appendChild(document.createTextNode(' \u2212 '));
+    formula.appendChild(mkStrong('Pad ' + p));
+    formula.appendChild(document.createTextNode(' = '));
+    formula.appendChild(mkStrong('Inner ' + expected, ok ? 'ok' : 'bad'));
+    formula.appendChild(document.createTextNode(ok ? '  \u2713' : '  \u00b7 current: ' + inn + '  \u2717'));
+  };
+
+  [rOuter, rPad, rInner].forEach(el => el.addEventListener('input', sync));
+  match.addEventListener('click', () => {
+    const o = +rOuter.value;
+    const p = +rPad.value;
+    rInner.value = Math.max(0, o - p);
+    sync();
+  });
+  sync();
+})();
+
+// Demo 5: Optical alignment live
+(() => {
+  const tri = document.getElementById('triLive');
+  const slider = document.getElementById('triSlider');
+  const vLabel = document.getElementById('triV');
+  const verdict = document.getElementById('triVerdict');
+  if (!tri || !slider) return;
+
+  const sync = () => {
+    const v = parseFloat(slider.value);
+    tri.style.setProperty('--tri-offset', v + 'px');
+    vLabel.textContent = (v >= 0 ? '+' : '') + v.toFixed(1) + 'px';
+    let verdictText;
+    if (v < 0.5) verdictText = 'Geometric center. Feels pulled left.';
+    else if (v < 1.4) verdictText = 'Close. Still leans.';
+    else if (v <= 2.4) verdictText = 'Optically balanced.';
+    else verdictText = 'Over-corrected. Lists right.';
+    verdict.textContent = verdictText;
+  };
+
+  slider.addEventListener('input', sync);
+  document.querySelectorAll('[data-tri]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      slider.value = btn.dataset.tri;
+      sync();
+    });
+  });
+  sync();
+})();
+
+// Demo 6: Border + shadow toggles
+(() => {
+  const card = document.getElementById('cardLive');
+  const bTog = document.getElementById('cardBorderTog');
+  const sTog = document.getElementById('cardShadowTog');
+  const verdict = document.getElementById('cardVerdict');
+  if (!card || !bTog || !sTog) return;
+
+  const sync = () => {
+    const b = bTog.checked ? '1' : '0';
+    const s = sTog.checked ? '1' : '0';
+    card.dataset.border = b;
+    card.dataset.shadow = s;
+    let msg;
+    if (b === '0' && s === '0') msg = 'Neither. Floats nowhere.';
+    else if (b === '1' && s === '0') msg = 'Border only. Flat, editorial.';
+    else if (b === '0' && s === '1') msg = 'Shadow only. Mushy edges.';
+    else msg = 'Both. Object on a surface.';
+    verdict.textContent = msg;
+  };
+
+  bTog.addEventListener('change', sync);
+  sTog.addEventListener('change', sync);
+  document.querySelectorAll('[data-card]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.dataset.card;
+      bTog.checked = (mode === 'border' || mode === 'both');
+      sTog.checked = (mode === 'shadow' || mode === 'both');
+      sync();
+    });
+  });
+  sync();
 })();
 
 // Demo 5: Spring vs bezier motion

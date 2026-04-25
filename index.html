@@ -725,6 +725,123 @@ body.ready .hero-strip { opacity: 1; transform: none; }
    ══════════════════════════════════════════════════════════════════ */
 .writing { background: var(--bg); }
 
+/* ══════════════════════════════════════════════════════════════════
+   EXPERIMENTS
+   Originals: long-form essays and interactive studies.
+   ══════════════════════════════════════════════════════════════════ */
+.experiments { background: var(--bg-sunken); }
+.experiments-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.exp-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 40px;
+  padding: 56px 56px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  position: relative; overflow: hidden;
+  align-items: start;
+  transition: transform 500ms var(--ease-out-expo), box-shadow 500ms var(--ease-out-expo);
+}
+.exp-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(600px circle at 100% 0%, var(--accent-glow), transparent 50%);
+  opacity: 0; pointer-events: none;
+  transition: opacity 600ms var(--ease-out-expo);
+}
+.exp-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.exp-card:hover::before { opacity: 1; }
+
+.exp-index {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+  padding-top: 6px;
+}
+
+.exp-body { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.exp-meta {
+  display: flex; gap: 8px 18px; flex-wrap: wrap;
+  font-family: var(--ff-mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+.exp-meta .pill {
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+.exp-meta .sep { color: var(--line-strong); }
+
+.exp-title {
+  font-family: var(--ff-serif);
+  font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  transition: color 200ms var(--ease-out-quint);
+  max-width: 18ch;
+}
+.exp-card:hover .exp-title { color: var(--accent); }
+.exp-title em { color: var(--accent); font-style: italic; }
+
+.exp-desc {
+  color: var(--ink-muted); font-size: 15px;
+  line-height: 1.58; max-width: 62ch;
+}
+.exp-desc strong { color: var(--ink-2); font-weight: 500; }
+
+.exp-facets {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 4px;
+}
+.exp-facet {
+  font-family: var(--ff-mono); font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 5px 9px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-muted);
+}
+
+.exp-arrow {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  color: var(--ink);
+  flex-shrink: 0;
+  transition: background 400ms var(--ease-out-expo), color 400ms var(--ease-out-expo), transform 400ms var(--ease-out-expo);
+  margin-top: 2px;
+}
+.exp-card:hover .exp-arrow {
+  background: var(--ink); color: var(--bg);
+  transform: translate(4px, -4px);
+}
+.exp-arrow svg { width: 16px; height: 16px; }
+
+.experiments-foot {
+  margin-top: 32px;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-subtle);
+  text-align: center;
+}
+
+/* Legacy featured-essay retained for compatibility (unused) */
 .featured-essay {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -1024,6 +1141,9 @@ footer .colophon {
   .now-card { grid-template-columns: 1fr; gap: 18px; padding: 32px 28px; }
   .featured-essay { grid-template-columns: 1fr; gap: 18px; padding: 28px 24px; }
   .featured-arrow { justify-self: end; }
+  .exp-card { grid-template-columns: 1fr; gap: 22px; padding: 36px 28px; }
+  .exp-arrow { justify-self: end; margin-top: 0; }
+  .exp-index { padding-top: 0; }
   footer { padding: 32px 28px; }
 }
 @media (max-width: 540px) {
@@ -1089,6 +1209,7 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
     <div class="nav-links" aria-label="Sections">
       <a href="#work">Work</a>
       <a href="#craft">Craft</a>
+      <a href="#experiments">Experiments</a>
       <a href="#experience">Experience</a>
       <a href="#writing">Writing</a>
       <a href="#contact">Contact</a>
@@ -1382,6 +1503,55 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
   </div>
 </section>
 
+<section class="experiments" id="experiments" aria-labelledby="exps-heading">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="label">Experiments</div>
+      <h2 id="exps-heading">Studies, in <em>depth.</em></h2>
+      <p class="deck">
+        Long&#8209;form essays and interactive studies on the craft. Where one idea gets pursued until it breaks, with the demos and citations to back it up. Separate from the weekly Medium pieces below.
+      </p>
+    </div>
+
+    <div class="experiments-grid" data-reveal>
+
+      <a class="exp-card" href="/writing/details-that-make-interfaces-feel-better/" aria-label="Read: Details that make interfaces feel better">
+        <span class="exp-index">01</span>
+        <div class="exp-body">
+          <div class="exp-meta">
+            <span class="pill">Featured essay</span>
+            <span>Mar 2026</span>
+            <span class="sep">·</span>
+            <span>~18 min read</span>
+            <span class="sep">·</span>
+            <span>31 details</span>
+          </div>
+          <h3 class="exp-title">Details that make interfaces <em>feel better.</em></h3>
+          <p class="exp-desc">
+            A curated study of thirty&#8209;one interface details. Each one grounded in a real shipping product with <strong>10+ interactive demos</strong>. Toggles, sliders, live previews. Research from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion. Not claims. Observations.
+          </p>
+          <div class="exp-facets">
+            <span class="exp-facet">Typography</span>
+            <span class="exp-facet">Geometry</span>
+            <span class="exp-facet">Motion</span>
+            <span class="exp-facet">Interaction</span>
+            <span class="exp-facet">Feedback</span>
+            <span class="exp-facet">State</span>
+          </div>
+        </div>
+        <span class="exp-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </span>
+      </a>
+
+    </div>
+
+    <div class="experiments-foot" data-reveal>
+      More studies in progress. New experiment every two to four weeks.
+    </div>
+  </div>
+</section>
+
 <section class="experience" id="experience" aria-labelledby="exp-heading">
   <div class="wrap">
     <div class="section-head" data-reveal>
@@ -1490,23 +1660,11 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
   <div class="wrap">
     <div class="section-head" data-reveal>
       <div class="label">Writing</div>
-      <h2 id="writing-heading">Essays on the <em>craft.</em></h2>
+      <h2 id="writing-heading">Weekly, on <em>Medium.</em></h2>
       <p class="deck">
-        A featured long&#8209;form essay below, plus shorter pieces on design judgment, AI and taste, micro&#8209;interactions, and the systems that let good work scale. New writing weekly.
+        Short pieces on design judgment, AI and taste, micro&#8209;interactions, and the systems that let good work scale. Auto synced from the feed.
       </p>
     </div>
-
-    <a class="featured-essay" href="/writing/details-that-make-interfaces-feel-better/" data-reveal aria-label="Read: Details that make interfaces feel better">
-      <span class="featured-tag"><span class="star" aria-hidden="true"></span>Featured</span>
-      <div class="featured-body">
-        <span class="featured-meta">Essay · Mar 2026 · ~18 min</span>
-        <span class="featured-title">Details that make interfaces <em>feel better.</em></span>
-        <span class="featured-desc">A field study of thirty&#8209;one details, each one grounded in a real product. Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion. Not claims. Observations.</span>
-      </div>
-      <span class="featured-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </span>
-    </a>
 
     <div class="posts-list" id="posts" data-state="loading" role="list" aria-label="Recent writing"></div>
 
@@ -1676,7 +1834,7 @@ updateNav();
 window.addEventListener('scroll', updateNav, { passive: true });
 
 // Active section
-const sectionIds = ['work', 'craft', 'experience', 'writing', 'contact'];
+const sectionIds = ['work', 'craft', 'experiments', 'experience', 'writing', 'contact'];
 const navLinks = {};
 sectionIds.forEach(id => {
   const l = document.querySelector('.nav-links a[href="#' + id + '"]');
