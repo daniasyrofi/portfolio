@@ -89,3 +89,13 @@
   [headers.values]
     Content-Type = "application/xml"
     Cache-Control = "public, max-age=3600"
+
+# Shadcn-compatible registry. Served with CORS so the shadcn CLI
+# (and any mirror) can fetch from any origin.
+[[headers]]
+  for = "/r/*"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Cache-Control = "public, max-age=300, s-maxage=3600"

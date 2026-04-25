@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Details that make interfaces feel better · Dani Asyrofi</title>
-<meta name="description" content="A curated study of 30+ interface details, each one grounded in a specific production example from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion, and other top-tier products. Not claims. Observations." />
+<title>Interface Tuning · A field guide · Dani Asyrofi</title>
+<meta name="description" content="Interface Tuning. A field guide to thirty-one interface details from shipping products. Install the kit with one command, from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion. Observations, not claims." />
 <meta name="author" content="Muhammad Dani Asyrofi" />
 <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0e0d0b" media="(prefers-color-scheme: dark)" />
@@ -13,8 +13,8 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Dani Asyrofi" />
-<meta property="og:title" content="Details that make interfaces feel better" />
-<meta property="og:description" content="A curated study of 30+ interface details, each one grounded in a specific production example from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, and Notion." />
+<meta property="og:title" content="Interface Tuning. A field guide to thirty-one interface details" />
+<meta property="og:description" content="Thirty-one details from shipping products, with interactive demos and a one-command install. Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, Notion." />
 <meta property="og:url" content="https://daniasyrofi.com/writing/details-that-make-interfaces-feel-better/" />
 <meta property="og:image" content="https://daniasyrofi.com/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -24,8 +24,8 @@
 <meta property="article:section" content="Design" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Details that make interfaces feel better" />
-<meta name="twitter:description" content="30+ curated interface details with real examples from Linear, Stripe, Vercel, Raycast, Apple, Figma, Arc, and Notion." />
+<meta name="twitter:title" content="Interface Tuning. A field guide to thirty-one interface details" />
+<meta name="twitter:description" content="Thirty-one details from shipping products, with interactive demos and a one-command install." />
 <meta name="twitter:image" content="https://daniasyrofi.com/assets/og-image.png" />
 
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
@@ -40,8 +40,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Details that make interfaces feel better",
-  "description": "A curated study of 30+ interface details grounded in production examples from top-tier products.",
+  "headline": "Interface Tuning. A field guide to thirty-one interface details",
+  "description": "Thirty-one details from shipping products, with interactive demos and a one-command install.",
   "image": "https://daniasyrofi.com/assets/og-image.png",
   "author": {
     "@type": "Person",
@@ -1141,6 +1141,310 @@ pre code {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   INSTALL BOX
+   ══════════════════════════════════════════════════════════════════ */
+.install-box {
+  margin: 32px 0 48px;
+  padding: 28px 32px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  position: relative; overflow: hidden;
+}
+.install-box::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(600px circle at 100% 0%, var(--accent-glow), transparent 55%);
+  opacity: 0.6; pointer-events: none;
+}
+.install-kicker {
+  font-family: var(--ff-mono);
+  font-size: 10.5px; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: inline-flex; align-items: center; gap: 10px;
+  position: relative;
+}
+.install-kicker::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.install-title {
+  font-family: var(--ff-serif);
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.12; letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 10px;
+  position: relative;
+}
+.install-title em { color: var(--accent); font-style: italic; }
+.install-sub {
+  color: var(--ink-muted); font-size: 14.5px;
+  line-height: 1.55; margin-bottom: 20px;
+  max-width: 56ch;
+  position: relative;
+}
+.install-sub strong { color: var(--ink-2); font-weight: 500; }
+
+.install-cmd {
+  display: flex; align-items: stretch;
+  background: var(--ink); color: var(--bg);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  margin-bottom: 18px;
+}
+.install-cmd-prompt {
+  padding: 14px 8px 14px 18px;
+  color: var(--accent);
+  opacity: 0.8;
+  user-select: none;
+  flex-shrink: 0;
+}
+.install-cmd-text {
+  flex: 1;
+  padding: 14px 16px 14px 4px;
+  overflow-x: auto;
+  white-space: nowrap;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+}
+.install-cmd-text::-webkit-scrollbar { display: none; }
+.install-cmd-copy {
+  padding: 0 18px;
+  background: rgb(255 255 255 / 0.08);
+  color: var(--bg);
+  border: 0;
+  border-left: 1px solid rgb(255 255 255 / 0.08);
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms var(--ease-out-expo);
+  display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+.install-cmd-copy:hover { background: rgb(255 255 255 / 0.14); }
+.install-cmd-copy.is-copied { color: var(--accent); }
+
+.install-facts {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  position: relative;
+}
+.install-fact {
+  font-family: var(--ff-mono); font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 5px 9px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   VERDICT BADGE (check / X)
+   ══════════════════════════════════════════════════════════════════ */
+.verdict {
+  position: absolute;
+  bottom: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--ff-sans);
+  line-height: 1;
+  box-shadow: 0 0 0 4px var(--bg-sunken);
+}
+.verdict--ok { background: #22a36d; }
+.verdict--bad { background: #c23b22; }
+[data-theme="dark"] .verdict--ok { background: #2ec58a; }
+[data-theme="dark"] .verdict--bad { background: #e8604a; }
+
+.demo-col--with-verdict { padding-bottom: 52px; }
+
+/* ══════════════════════════════════════════════════════════════════
+   CONCENTRIC RADIUS. Compare view with corner annotations
+   ══════════════════════════════════════════════════════════════════ */
+.radius-compare {
+  display: flex; flex-direction: column; gap: 18px;
+  align-items: center;
+}
+.radius-anno {
+  position: relative;
+  display: grid; place-items: center;
+  padding: 24px;
+}
+.radius-box {
+  width: 128px; height: 128px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line-strong);
+  padding: 14px;
+  display: grid; place-items: center;
+  position: relative;
+}
+.radius-box .radius-inner-2 {
+  width: 100%; height: 100%;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+}
+.radius-box--bad {
+  border-radius: 18px;
+}
+.radius-box--bad .radius-inner-2 { border-radius: 18px; }
+.radius-box--good {
+  border-radius: 18px;
+}
+.radius-box--good .radius-inner-2 { border-radius: 4px; }
+
+.radius-label {
+  position: absolute;
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--bg-raised);
+  border: 1px solid currentColor;
+}
+.radius-label--bad { color: #c23b22; }
+.radius-label--ok  { color: #22a36d; }
+[data-theme="dark"] .radius-label--bad { color: #ff7a5c; }
+[data-theme="dark"] .radius-label--ok  { color: #3de19e; }
+
+.radius-label--tl { top: -12px; left: -16px; }
+.radius-label--inner { top: 14px; left: 14px; transform: translate(-50%, -50%); }
+.radius-label--pad {
+  top: -40px; left: 50%; transform: translateX(-50%);
+  color: var(--ink-muted);
+  background: var(--bg-raised);
+  border-color: var(--line);
+}
+
+.radius-arc {
+  position: absolute;
+  pointer-events: none;
+  width: 40px; height: 40px;
+  fill: none;
+  stroke-width: 1.5;
+}
+.radius-arc--outer.bad { stroke: #c23b22; top: -4px; left: -4px; }
+.radius-arc--outer.ok  { stroke: #22a36d; top: -4px; left: -4px; }
+.radius-arc--inner.bad { stroke: #c23b22; top: 10px; left: 10px; }
+.radius-arc--inner.ok  { stroke: #22a36d; top: 10px; left: 10px; }
+[data-theme="dark"] .radius-arc--outer.bad,
+[data-theme="dark"] .radius-arc--inner.bad { stroke: #ff7a5c; }
+[data-theme="dark"] .radius-arc--outer.ok,
+[data-theme="dark"] .radius-arc--inner.ok  { stroke: #3de19e; }
+
+/* Show values toggle wrapper */
+.demo-toolbar {
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: center; align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   TEXT-WRAP with width slider
+   ══════════════════════════════════════════════════════════════════ */
+.wrap-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  justify-items: center;
+}
+.wrap-col {
+  padding: 20px 16px;
+  background: var(--bg-sunken);
+  border-radius: 10px;
+  position: relative;
+  width: var(--wrap-w, 220px);
+  max-width: 100%;
+  transition: width 140ms var(--ease-out-quint);
+  min-height: 160px;
+}
+.wrap-tag {
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+  position: absolute;
+  top: 10px; left: 14px;
+}
+.wrap-heading {
+  font-family: var(--ff-serif);
+  font-size: 19px;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 28px 0 10px;
+}
+.wrap-heading.balanced { text-wrap: balance; }
+.wrap-body {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.wrap-body.pretty { text-wrap: pretty; }
+
+/* ══════════════════════════════════════════════════════════════════
+   REALISTIC CARD (for border+shadow demo)
+   ══════════════════════════════════════════════════════════════════ */
+.card-live--realistic {
+  padding: 28px 24px 24px;
+  max-width: 320px;
+  text-align: left;
+  font-family: var(--ff-sans);
+  font-style: normal;
+}
+.card-live--realistic .rc-title {
+  font-family: var(--ff-serif);
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 10px;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.card-live--realistic .rc-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+  max-width: 38ch;
+}
+.card-live--realistic .rc-actions {
+  display: flex; gap: 8px;
+}
+.card-live--realistic .rc-btn {
+  padding: 7px 14px;
+  font-size: 12px; font-weight: 450;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.card-live--realistic .rc-btn--primary {
+  background: var(--ink); color: var(--bg); border-color: var(--ink);
+}
+.card-live--realistic .rc-btn--secondary {
+  background: transparent; color: var(--ink); border-color: var(--line-strong);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
    TABLE OF CONTENTS (sticky desktop)
    ══════════════════════════════════════════════════════════════════ */
 .toc {
@@ -1438,23 +1742,32 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
           <li><a href="#d-31" data-num="31">Density modes</a></li>
         </ol>
       </div>
+
+      <div class="toc-group">
+        <span class="toc-group-title">X · Install</span>
+        <ol>
+          <li><a href="#s-install" data-num="→">One command</a></li>
+        </ol>
+      </div>
     </nav>
   </aside>
 
   <article class="article" id="article">
 
     <header class="article-header">
-      <div class="article-kicker">Essay · March 2026</div>
-      <h1 class="article-title">Details that make interfaces <em>feel better.</em></h1>
+      <div class="article-kicker">Field Guide · March 2026</div>
+      <h1 class="article-title">Interface <em>Tuning.</em></h1>
       <p class="article-deck">
-        A field study of thirty-one details, each one grounded in a real product you already use. Not claims. Observations.
+        A field guide to thirty&#8209;one interface details from shipping products. Every one demoed. Every one installable. Observations, not claims.
       </p>
       <div class="article-byline">
         <span class="author">Dani Asyrofi</span>
         <span class="sep">·</span>
-        <span>~18 min read</span>
+        <span>~20 min read</span>
         <span class="sep">·</span>
-        <span>v1.0</span>
+        <span>v2.0</span>
+        <span class="sep">·</span>
+        <span>Install ready</span>
       </div>
     </header>
 
@@ -1478,6 +1791,28 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
     <p>
       Read straight through, or jump between sections. Each section is independent. At the end, a few words on why details compound.
     </p>
+
+    <aside class="install-box" id="installTop" aria-label="Install the kit">
+      <div class="install-kicker">Install the kit</div>
+      <div class="install-title">Every detail ships as <em>code,</em> not advice.</div>
+      <p class="install-sub">
+        Not a list of things to admire. The CSS utilities, motion tokens, and reduced-motion guards behind every detail below install into any project with <strong>one command</strong>. Works with Next.js, Vite, Remix, Astro, or TanStack Start. Shadcn-compatible. Zero runtime dependencies.
+      </p>
+      <div class="install-cmd">
+        <span class="install-cmd-prompt">$</span>
+        <span class="install-cmd-text" id="installCmdText">npx shadcn@latest add https://daniasyrofi.com/r/interface-tuning.json</span>
+        <button class="install-cmd-copy" id="installCopy" aria-label="Copy install command">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>
+          <span id="installCopyLabel">Copy</span>
+        </button>
+      </div>
+      <div class="install-facts">
+        <span class="install-fact">.tnum · .balance · .focus-ring · .glass</span>
+        <span class="install-fact">Motion tokens</span>
+        <span class="install-fact">Reduced-motion guards</span>
+        <span class="install-fact">Tailwind v4 ready</span>
+      </div>
+    </aside>
 
     <!-- ════════════════════════════════════════════════
          I · TYPOGRAPHY
@@ -1541,24 +1876,31 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
         A headline that ends with a single word orphaned on its own line reads as broken layout. Historically this was fixed with manual <code>&lt;br&gt;</code> tags, which inevitably broke the moment someone shipped a new breakpoint. The browser now does it correctly, at the line-break layer, across any viewport.
       </p>
       <figure class="demo">
-        <div class="demo-stage demo-stage--stack">
-          <div class="demo-col">
-            <span class="demo-tag" id="wrapStateTag">text-wrap: balance</span>
-            <h4 class="demo-heading demo-heading--balance" id="demoWrap">Details that make interfaces feel better when you get them right</h4>
-          </div>
-        </div>
-        <div class="demo-stage" style="padding: 14px 28px; border-top: 1px solid var(--line);">
-          <div class="demo-controls">
-            <div class="toggle-row" style="justify-content: center; max-width: none; gap: 12px;">
-              <span class="demo-toggle-label">Balance</span>
-              <label class="toggle">
-                <input type="checkbox" id="wrapToggle" checked>
-                <span class="toggle-track"><span class="toggle-thumb"></span></span>
-              </label>
+        <div class="demo-stage demo-stage--stack" style="justify-items: center;">
+          <div class="wrap-stage" id="wrapStage" style="--wrap-w: 230px;">
+            <div class="wrap-col demo-col--with-verdict">
+              <span class="wrap-tag">wrap</span>
+              <h4 class="wrap-heading">Designing interfaces that feel natural and intuitive</h4>
+              <p class="wrap-body">Great design is invisible. It guides users without them ever noticing.</p>
+              <span class="verdict verdict--bad" aria-label="Orphan">✕</span>
+            </div>
+            <div class="wrap-col demo-col--with-verdict">
+              <span class="wrap-tag">balance</span>
+              <h4 class="wrap-heading balanced">Designing interfaces that feel natural and intuitive</h4>
+              <p class="wrap-body pretty">Great design is invisible. It guides users without them ever noticing.</p>
+              <span class="verdict verdict--ok" aria-label="Balanced">✓</span>
             </div>
           </div>
         </div>
-        <figcaption>Flip the toggle. The same heading swings between default wrap (trailing word alone) and balanced (lines visually even).</figcaption>
+        <div class="demo-stage" style="padding: 16px 28px; border-top: 1px solid var(--line); grid-template-columns: 1fr auto; align-items: center; gap: 24px;">
+          <div class="slider-row" style="max-width: none;">
+            <label>Column width</label>
+            <output id="wrapW">230px</output>
+            <input type="range" min="150" max="360" step="5" value="230" id="wrapSlider" class="slider" aria-label="Column width in pixels">
+          </div>
+          <button class="demo-btn" id="wrapReset">Reset</button>
+        </div>
+        <figcaption>Drag Column width. At most widths the left column strands a trailing word. The right column with <code>text-wrap: balance</code> stays even across the full range.</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -1619,33 +1961,62 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       </p>
       <figure class="demo">
         <div class="demo-stage demo-stage--2col">
-          <div class="demo-col">
-            <span class="demo-tag">Live preview</span>
-            <div class="radius-live" id="radiusLive" style="--r-outer: 16px; --r-pad: 12px; --r-inner: 4px;">
-              <div class="radius-inner"></div>
+          <div class="demo-col demo-col--with-verdict">
+            <span class="demo-tag">Inner = Outer</span>
+            <div class="radius-anno">
+              <div class="radius-box radius-box--bad">
+                <span class="radius-label radius-label--bad radius-label--tl">18px</span>
+                <div class="radius-inner-2"></div>
+                <span class="radius-label radius-label--bad radius-label--inner">18px</span>
+              </div>
             </div>
-            <div class="demo-formula" id="radiusFormula"><strong>Outer 16</strong> − <strong>Pad 12</strong> = <strong class="ok">Inner 4</strong> ✓</div>
+            <span class="demo-note">Curves collide</span>
+            <span class="verdict verdict--bad" aria-label="Not concentric">✕</span>
           </div>
-          <div class="demo-col demo-col--controls">
-            <div class="slider-row">
-              <label>Outer radius</label>
-              <output id="rOuterV">16</output>
-              <input type="range" min="0" max="28" step="1" value="16" id="rOuter" class="slider" aria-label="Outer radius in pixels">
+          <div class="demo-col demo-col--with-verdict">
+            <span class="demo-tag">Outer − Padding</span>
+            <div class="radius-anno">
+              <div class="radius-box radius-box--good">
+                <span class="radius-label radius-label--ok radius-label--tl">18px</span>
+                <div class="radius-inner-2"></div>
+                <span class="radius-label radius-label--ok radius-label--inner">4px</span>
+              </div>
             </div>
-            <div class="slider-row">
-              <label>Padding</label>
-              <output id="rPadV">12</output>
-              <input type="range" min="0" max="22" step="1" value="12" id="rPad" class="slider" aria-label="Padding in pixels">
-            </div>
-            <div class="slider-row">
-              <label>Inner radius</label>
-              <output id="rInnerV">4</output>
-              <input type="range" min="0" max="28" step="1" value="4" id="rInner" class="slider" aria-label="Inner radius in pixels">
-            </div>
-            <button class="demo-btn" id="rMatch">Match the formula</button>
+            <span class="demo-note">Curves parallel</span>
+            <span class="verdict verdict--ok" aria-label="Concentric">✓</span>
           </div>
         </div>
-        <figcaption>Slide Outer and Padding. The formula says Inner should equal Outer − Padding. Now drag Inner off the correct value and watch the curves fight.</figcaption>
+
+        <div class="demo-stage" style="padding: 32px 28px; border-top: 1px solid var(--line);">
+          <div class="demo-stage demo-stage--2col" style="padding: 0;">
+            <div class="demo-col">
+              <span class="demo-tag">Live preview</span>
+              <div class="radius-live" id="radiusLive" style="--r-outer: 16px; --r-pad: 12px; --r-inner: 4px;">
+                <div class="radius-inner"></div>
+              </div>
+              <div class="demo-formula" id="radiusFormula"><strong>Outer 16</strong> − <strong>Pad 12</strong> = <strong class="ok">Inner 4</strong> ✓</div>
+            </div>
+            <div class="demo-col demo-col--controls">
+              <div class="slider-row">
+                <label>Outer radius</label>
+                <output id="rOuterV">16</output>
+                <input type="range" min="0" max="28" step="1" value="16" id="rOuter" class="slider" aria-label="Outer radius in pixels">
+              </div>
+              <div class="slider-row">
+                <label>Padding</label>
+                <output id="rPadV">12</output>
+                <input type="range" min="0" max="22" step="1" value="12" id="rPad" class="slider" aria-label="Padding in pixels">
+              </div>
+              <div class="slider-row">
+                <label>Inner radius</label>
+                <output id="rInnerV">4</output>
+                <input type="range" min="0" max="28" step="1" value="4" id="rInner" class="slider" aria-label="Inner radius in pixels">
+              </div>
+              <button class="demo-btn" id="rMatch">Match the formula</button>
+            </div>
+          </div>
+        </div>
+        <figcaption>Top: two static examples, same outer and padding. Bottom: drag the sliders. Notice how the curves fight the moment Inner drifts from Outer − Padding.</figcaption>
       </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
@@ -1894,7 +2265,14 @@ background: rgb(255 255 255 / 0.72);</code></pre>
         <div class="demo-stage demo-stage--2col">
           <div class="demo-col">
             <span class="demo-tag">Live card</span>
-            <div class="card-live" id="cardLive" data-border="0" data-shadow="0">Hello.</div>
+            <div class="card-live card-live--realistic" id="cardLive" data-border="0" data-shadow="0">
+              <div class="rc-title">Track expenses, build lasting habits</div>
+              <div class="rc-desc">Budgeting turned upside down. Focus on what matters and keep your spending intentional.</div>
+              <div class="rc-actions">
+                <button class="rc-btn rc-btn--primary" type="button">Primary</button>
+                <button class="rc-btn rc-btn--secondary" type="button">Secondary</button>
+              </div>
+            </div>
             <span class="demo-note" id="cardVerdict">Neither. Floats nowhere.</span>
           </div>
           <div class="demo-col demo-col--controls" style="justify-content: center;">
@@ -2418,6 +2796,52 @@ box-shadow:
     </section>
 
     <!-- ════════════════════════════════════════════════
+         INSTALL (full)
+         ════════════════════════════════════════════════ -->
+    <h2 id="s-install"><span class="num">X</span>Install and ship</h2>
+    <p class="section-intro">
+      You read it. Now run it. Every utility, token, and guard behind the details above is shipped as a Shadcn-compatible registry, hosted on this site.
+    </p>
+
+    <aside class="install-box" aria-label="Full install">
+      <div class="install-kicker">One command</div>
+      <div class="install-title">Tuning kit.</div>
+      <p class="install-sub">
+        Lands in <code>app/globals.css</code> (or wherever your Tailwind entry is) and <code>tailwind.config</code> if you're still on v3. Your design tokens, utilities, and keyframes, pre-tuned.
+      </p>
+      <div class="install-cmd">
+        <span class="install-cmd-prompt">$</span>
+        <span class="install-cmd-text">npx shadcn@latest add https://daniasyrofi.com/r/interface-tuning.json</span>
+        <button class="install-cmd-copy" id="installCopy2" aria-label="Copy install command">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>
+          <span id="installCopyLabel2">Copy</span>
+        </button>
+      </div>
+      <p class="install-sub" style="margin-bottom: 8px;">
+        <strong>What lands in your project.</strong>
+      </p>
+      <div class="install-facts" style="margin-bottom: 18px;">
+        <span class="install-fact">.tnum · tabular numerals</span>
+        <span class="install-fact">.balance / .pretty · text wrap</span>
+        <span class="install-fact">.font-smooth</span>
+        <span class="install-fact">.focus-ring</span>
+        <span class="install-fact">.card-elevated</span>
+        <span class="install-fact">.glass (backdrop-filter)</span>
+        <span class="install-fact">.skeleton + @keyframes</span>
+        <span class="install-fact">--ease-out-expo · --ease-out-quint · --ease-curtain · --ease-spring-out</span>
+        <span class="install-fact">--d-micro · --d-small · --d-medium · --d-large</span>
+        <span class="install-fact">--stagger-word · --stagger-line</span>
+        <span class="install-fact">prefers-reduced-motion guard</span>
+      </div>
+      <p class="install-sub" style="margin-bottom: 6px;">
+        <strong>Prerequisites.</strong> A project with <code>shadcn</code> initialized (<code>npx shadcn@latest init</code> once). Works with Tailwind v4 and v3.
+      </p>
+      <p class="install-sub" style="margin: 0;">
+        <strong>Source.</strong> The registry JSON is a plain file at <a class="link" href="/r/interface-tuning.json">/r/interface-tuning.json</a> on this site. Inspect, fork, or mirror it freely.
+      </p>
+    </aside>
+
+    <!-- ════════════════════════════════════════════════
          CLOSE
          ════════════════════════════════════════════════ -->
     <section class="article-close">
@@ -2435,7 +2859,7 @@ box-shadow:
       <div class="signature">Dani Asyrofi, Jakarta, March 2026.</div>
 
       <div class="article-next">
-        <span class="article-next-meta">End of essay</span>
+        <span class="article-next-meta">End of field guide</span>
         <a href="/" class="article-next-home">
           Back to portfolio
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -2591,18 +3015,24 @@ if (!prefersReduced) {
   start();
 })();
 
-// Demo 2: text-wrap balance toggle
+// Demo 2: text-wrap balance with live width slider
 (() => {
-  const toggle = document.getElementById('wrapToggle');
-  const heading = document.getElementById('demoWrap');
-  const tag = document.getElementById('wrapStateTag');
-  if (!toggle || !heading) return;
+  const stage = document.getElementById('wrapStage');
+  const slider = document.getElementById('wrapSlider');
+  const output = document.getElementById('wrapW');
+  const reset = document.getElementById('wrapReset');
+  if (!stage || !slider) return;
+
   const sync = () => {
-    const on = toggle.checked;
-    heading.classList.toggle('demo-heading--balance', on);
-    tag.textContent = on ? 'text-wrap: balance' : 'Default wrap';
+    const v = slider.value;
+    stage.style.setProperty('--wrap-w', v + 'px');
+    output.textContent = v + 'px';
   };
-  toggle.addEventListener('change', sync);
+  slider.addEventListener('input', sync);
+  if (reset) reset.addEventListener('click', () => {
+    slider.value = 230;
+    sync();
+  });
   sync();
 })();
 
@@ -2686,6 +3116,38 @@ if (!prefersReduced) {
     });
   });
   sync();
+})();
+
+// Install command: copy to clipboard
+(() => {
+  const INSTALL_CMD = 'npx shadcn@latest add https://daniasyrofi.com/r/interface-tuning.json';
+  const setupCopy = (btnId, labelId) => {
+    const btn = document.getElementById(btnId);
+    const label = document.getElementById(labelId);
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(INSTALL_CMD);
+        } else {
+          const t = document.createElement('textarea');
+          t.value = INSTALL_CMD;
+          document.body.appendChild(t);
+          t.select();
+          document.execCommand('copy');
+          document.body.removeChild(t);
+        }
+      } catch {}
+      btn.classList.add('is-copied');
+      if (label) label.textContent = 'Copied';
+      setTimeout(() => {
+        btn.classList.remove('is-copied');
+        if (label) label.textContent = 'Copy';
+      }, 1600);
+    });
+  };
+  setupCopy('installCopy', 'installCopyLabel');
+  setupCopy('installCopy2', 'installCopyLabel2');
 })();
 
 // Demo 6: Border + shadow toggles
