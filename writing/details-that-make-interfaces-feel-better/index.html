@@ -463,6 +463,443 @@ pre code {
 .how code { font-size: 13px; }
 
 /* ══════════════════════════════════════════════════════════════════
+   DEMO BLOCKS
+   Interactive and visual demonstrations for each detail.
+   ══════════════════════════════════════════════════════════════════ */
+.demo {
+  margin: 28px 0;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.demo-stage {
+  padding: 40px 28px;
+  background: var(--bg-raised);
+  display: grid;
+  gap: 24px;
+  align-items: stretch;
+}
+.demo-stage--2col { grid-template-columns: 1fr 1fr; }
+.demo-stage--3col { grid-template-columns: repeat(3, 1fr); }
+.demo-stage--stack { grid-template-columns: 1fr; }
+.demo-stage--row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 36px 28px; }
+
+.demo-col {
+  display: flex; flex-direction: column;
+  gap: 16px; align-items: center;
+  padding: 20px 16px;
+  border-radius: 10px;
+  background: var(--bg-sunken);
+  min-height: 140px;
+  justify-content: center;
+  position: relative;
+}
+
+.demo-tag {
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+  position: absolute;
+  top: 10px; left: 14px;
+}
+.demo-note {
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+
+.demo figcaption {
+  padding: 14px 28px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  text-transform: none;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: baseline; gap: 12px;
+}
+.demo figcaption::before {
+  content: "Demo";
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* Demo 1: Tabular numerals */
+.demo-num {
+  font-family: var(--ff-serif);
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.demo-num--tab { font-variant-numeric: tabular-nums; }
+
+/* Demo 2: text-wrap */
+.demo-heading {
+  font-family: var(--ff-serif);
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  max-width: 380px;
+  text-align: left;
+  padding: 8px 0;
+}
+.demo-heading--balance { text-wrap: balance; }
+
+/* Demo 3: Concentric radius */
+.radius-demo {
+  width: 110px; height: 110px;
+  background: var(--accent-soft);
+  padding: 14px;
+  display: grid; place-items: center;
+}
+.radius-demo--bad { border-radius: 16px; }
+.radius-demo--bad .radius-inner { border-radius: 16px; }
+.radius-demo--good { border-radius: 16px; }
+.radius-demo--good .radius-inner { border-radius: 2px; }
+.radius-inner {
+  width: 100%; height: 100%;
+  background: var(--accent);
+}
+
+/* Demo 4: Optical alignment */
+.play-btn {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: grid; place-items: center;
+  color: var(--bg);
+}
+.tri {
+  width: 26px; height: 26px;
+  fill: currentColor;
+}
+.tri--geo polygon { }
+.tri--opt polygon { transform: translateX(1.8px); }
+
+/* Demo 5: Spring vs bezier */
+.motion-track {
+  width: 100%; max-width: 260px;
+  height: 40px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.motion-dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(0);
+}
+.motion-dot.is-bezier {
+  transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.motion-dot.is-spring {
+  transition: transform 750ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.motion-dot.is-on { transform: translateX(188px); }
+.motion-trigger {
+  padding: 8px 18px;
+  background: var(--ink); color: var(--bg);
+  border-radius: 999px;
+  font-size: 12px; font-weight: 450;
+  font-family: var(--ff-sans);
+  letter-spacing: -0.005em;
+  cursor: pointer; border: 0;
+  transition: transform 200ms var(--ease-out-expo);
+}
+.motion-trigger:hover { transform: translateY(-1px); }
+
+/* Demo 6: Border + shadow cards */
+.card-sample {
+  width: 100%;
+  padding: 24px 18px;
+  border-radius: 10px;
+  background: var(--bg-raised);
+  text-align: center;
+  font-family: var(--ff-serif);
+  font-size: 17px;
+  color: var(--ink);
+  font-style: italic;
+}
+.card-sample--border {
+  border: 1px solid var(--line-strong);
+}
+.card-sample--shadow {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 8px 24px rgb(0 0 0 / 0.06);
+}
+.card-sample--both {
+  border: 1px solid var(--line);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 4px 12px rgb(0 0 0 / 0.04);
+}
+[data-theme="dark"] .card-sample--border {
+  border-color: var(--line-strong);
+}
+[data-theme="dark"] .card-sample--shadow {
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.04) inset,
+    0 12px 32px rgb(0 0 0 / 0.4);
+}
+[data-theme="dark"] .card-sample--both {
+  border: 1px solid var(--line);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.06) inset,
+    0 4px 12px rgb(0 0 0 / 0.3);
+}
+
+/* Demo 7: Focus rings */
+.focus-btn {
+  padding: 12px 22px;
+  background: var(--bg-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 14px; font-weight: 450;
+  font-family: var(--ff-sans);
+  cursor: pointer;
+  transition: border-color 200ms var(--ease-out-expo);
+}
+.focus-btn--default:focus-visible {
+  outline: 2px solid #0066ff;
+  outline-offset: 0;
+  border-radius: 10px;
+}
+.focus-btn--designed:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-color: var(--accent);
+}
+
+/* Demo 8: Skeleton */
+.skel-card {
+  width: 100%;
+  padding: 20px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex; gap: 16px; align-items: center;
+  min-height: 100px;
+}
+.skel-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  color: var(--accent);
+  font-family: var(--ff-serif);
+  font-size: 22px;
+  font-style: italic;
+}
+.skel-body { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.skel-title { font-size: 14px; color: var(--ink); font-weight: 450; }
+.skel-sub { font-family: var(--ff-mono); font-size: 11px; color: var(--ink-subtle); letter-spacing: 0.04em; }
+.skel-badge {
+  font-family: var(--ff-mono); font-size: 10px;
+  color: var(--accent); letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  border-radius: 999px;
+}
+
+.skel-card[data-state="loading"] .skel-avatar,
+.skel-card[data-state="loading"] .skel-title,
+.skel-card[data-state="loading"] .skel-sub,
+.skel-card[data-state="loading"] .skel-badge {
+  color: transparent;
+  background: linear-gradient(90deg, var(--bg-sunken) 0%, var(--line) 50%, var(--bg-sunken) 100%);
+  background-size: 200% 100%;
+  animation: skelShimmer 1.6s ease-in-out infinite;
+  border-radius: 4px;
+}
+.skel-card[data-state="loading"] .skel-avatar { border-radius: 50%; }
+.skel-card[data-state="loading"] .skel-title { height: 14px; width: 70%; }
+.skel-card[data-state="loading"] .skel-sub { height: 11px; width: 40%; }
+.skel-card[data-state="loading"] .skel-badge { height: 18px; width: 56px; padding: 0; }
+@keyframes skelShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skel-toggle {
+  padding: 8px 16px;
+  background: var(--ink); color: var(--bg);
+  border: 0; border-radius: 999px;
+  font-size: 12px; font-weight: 450;
+  cursor: pointer;
+  font-family: var(--ff-sans);
+  transition: transform 200ms var(--ease-out-expo);
+  margin-top: 4px;
+}
+.skel-toggle:hover { transform: translateY(-1px); }
+
+/* Demo 9: Toast */
+.toast-btn {
+  padding: 11px 22px;
+  background: var(--ink); color: var(--bg);
+  border: 0; border-radius: 999px;
+  font-size: 13px; font-weight: 450;
+  font-family: var(--ff-sans);
+  cursor: pointer;
+  transition: transform 200ms var(--ease-out-expo);
+}
+.toast-btn:hover { transform: translateY(-1px); }
+
+.toast-wrap {
+  height: 60px; width: 100%;
+  display: grid; place-items: center;
+  position: relative;
+}
+.toast {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 10px 14px 10px 18px;
+  background: var(--ink); color: var(--bg);
+  border-radius: 10px;
+  font-size: 13px; font-weight: 450;
+  font-family: var(--ff-sans);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.2);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo);
+  pointer-events: none;
+  position: relative;
+  overflow: hidden;
+  min-width: 220px;
+}
+.toast.is-in {
+  opacity: 1; transform: none; pointer-events: auto;
+}
+.toast-undo {
+  padding: 4px 10px;
+  background: transparent; color: var(--accent);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 6px;
+  font-size: 11.5px; font-weight: 500;
+  font-family: var(--ff-mono);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+.toast-undo:hover { border-color: var(--accent); }
+.toast-progress {
+  position: absolute;
+  left: 0; bottom: 0; height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+.toast.is-in .toast-progress {
+  animation: toastProg 4s linear forwards;
+}
+@keyframes toastProg {
+  to { transform: scaleX(0); }
+}
+
+/* Demo 10: Tooltip tier */
+.tip-btn {
+  width: 40px; height: 40px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-family: var(--ff-serif);
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: background 200ms var(--ease-out-expo), transform 200ms var(--ease-out-expo);
+}
+.tip-btn:hover { background: var(--bg-sunken); }
+.tip-btn::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%; transform: translateX(-50%) translateY(4px);
+  background: var(--ink); color: var(--bg);
+  font-family: var(--ff-sans);
+  font-size: 11px; font-weight: 450;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms var(--ease-out-expo), transform 160ms var(--ease-out-expo);
+}
+.tip-btn.is-tip-on::after {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+  transition-delay: 0ms;
+}
+
+/* Demo 11: Density toggle */
+.density-wrap { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 14px; }
+.density-toolbar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px;
+  background: var(--bg-sunken);
+  border-radius: 8px;
+  width: fit-content;
+}
+.density-toolbar button {
+  padding: 6px 14px;
+  background: transparent;
+  border: 0; border-radius: 6px;
+  font-size: 12px; font-weight: 450;
+  font-family: var(--ff-sans);
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.density-toolbar button.is-active {
+  background: var(--bg-raised);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.density-list {
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.density-row {
+  font-size: 13.5px;
+  color: var(--ink);
+  transition: padding 300ms var(--ease-out-expo), font-size 300ms var(--ease-out-expo);
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.density-row:last-child { border-bottom: 0; }
+.density-row .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); opacity: 0.6;
+}
+.density-list[data-density="comfy"] .density-row { padding: 12px 16px; }
+.density-list[data-density="compact"] .density-row { padding: 6px 16px; font-size: 12.5px; }
+
+@media (max-width: 640px) {
+  .demo-stage--2col,
+  .demo-stage--3col { grid-template-columns: 1fr; }
+  .demo-col { min-height: 120px; padding: 28px 16px 16px; }
+  .demo-tag { font-size: 9px; top: 8px; left: 12px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
    TABLE OF CONTENTS (sticky desktop)
    ══════════════════════════════════════════════════════════════════ */
 .toc {
@@ -818,6 +1255,21 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <p>
         The effect of getting this wrong is almost invisible in isolation and deeply irritating in aggregate. Rows with changing counts shimmer. Columns of prices drift. Timers twitch every second. All of that disappears with a single declaration.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--2col">
+          <div class="demo-col">
+            <span class="demo-tag">Proportional</span>
+            <div class="demo-num demo-num--prop" id="demoCountProp">111</div>
+            <span class="demo-note">Notice the left edge drift</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Tabular</span>
+            <div class="demo-num demo-num--tab" id="demoCountTab">111</div>
+            <span class="demo-note">Edge stays locked</span>
+          </div>
+        </div>
+        <figcaption>The counters tick in sync. Watch the leftmost digit as it flips between 1 and 0.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -837,6 +1289,20 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <p>
         A headline that ends with a single word orphaned on its own line reads as broken layout. Historically this was fixed with manual <code>&lt;br&gt;</code> tags, which inevitably broke the moment someone shipped a new breakpoint. The browser now does it correctly, at the line-break layer, across any viewport.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--2col">
+          <div class="demo-col">
+            <span class="demo-tag">Default</span>
+            <h4 class="demo-heading">Details that make interfaces feel better</h4>
+            <span class="demo-note">Trailing word orphaned</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">text-wrap: balance</span>
+            <h4 class="demo-heading demo-heading--balance">Details that make interfaces feel better</h4>
+            <span class="demo-note">Lines visually even</span>
+          </div>
+        </div>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -894,6 +1360,21 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <p>
         This rule sounds like a suggestion and is actually a constant. Once the eye is trained on it, broken radii are the easiest interface bug to spot.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--2col">
+          <div class="demo-col">
+            <span class="demo-tag">Off by the padding</span>
+            <div class="radius-demo radius-demo--bad"><div class="radius-inner"></div></div>
+            <span class="demo-note">Outer 16 · Inner 16 · Curves fight</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Concentric</span>
+            <div class="radius-demo radius-demo--good"><div class="radius-inner"></div></div>
+            <span class="demo-note">Outer 16 · Inner 2 · Curves parallel</span>
+          </div>
+        </div>
+        <figcaption>Look along the top-left corner of the inner shape. On the right, the inner curve tracks the outer curve. On the left, it collides with it.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -913,6 +1394,25 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <p>
         Asymmetric glyphs like a play triangle or an arrow look wrong when centered by bounding box. The triangle's visual mass is on its left edge, so geometric centering makes the shape feel pulled toward the left wall. Centering by eye, nudging one or two pixels right, is the fix. It is the one-pixel difference that elevates ordinary playback controls to Apple's.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--2col">
+          <div class="demo-col">
+            <span class="demo-tag">Geometric center</span>
+            <div class="play-btn">
+              <svg class="tri tri--geo" viewBox="0 0 24 24"><polygon points="7,4 21,12 7,20"/></svg>
+            </div>
+            <span class="demo-note">Feels pulled left</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Optical center</span>
+            <div class="play-btn">
+              <svg class="tri tri--opt" viewBox="0 0 24 24"><polygon points="7,4 21,12 7,20"/></svg>
+            </div>
+            <span class="demo-note">Balanced by eye</span>
+          </div>
+        </div>
+        <figcaption>Same triangle, nudged ~2 pixels right. The eye stops noticing the shape and starts trusting the button.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -959,6 +1459,21 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after {
       <p>
         Cubic-bezier is the right tool for opacity and color, where there is no physical metaphor. For anything that moves through space, use a spring. Springs overshoot subtly and settle, which is what real objects do. It is the difference between motion that has been <em>stamped</em> and motion that feels <em>lived-in.</em>
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--2col">
+          <div class="demo-col">
+            <span class="demo-tag">Cubic-bezier</span>
+            <div class="motion-track"><div class="motion-dot is-bezier" id="motionBezier"></div></div>
+            <button class="motion-trigger" data-target="motionBezier">Move</button>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Spring (back-out)</span>
+            <div class="motion-track"><div class="motion-dot is-spring" id="motionSpring"></div></div>
+            <button class="motion-trigger" data-target="motionSpring">Move</button>
+          </div>
+        </div>
+        <figcaption>Click each Move button. The spring overshoots past its target and settles back. The bezier just arrives.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1097,6 +1612,26 @@ background: rgb(255 255 255 / 0.72);</code></pre>
       <p>
         Pure borders feel flat and editorial. Pure shadows feel mushy on light backgrounds. A <code>1px</code> hairline border combined with a soft low-opacity shadow reads as a physical object resting on a surface. This is the single most common recipe in shipping design systems, and almost nobody gets it right on the first try.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--3col">
+          <div class="demo-col">
+            <span class="demo-tag">Border only</span>
+            <div class="card-sample card-sample--border">Hello.</div>
+            <span class="demo-note">Flat. Editorial.</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Shadow only</span>
+            <div class="card-sample card-sample--shadow">Hello.</div>
+            <span class="demo-note">Floating but soft</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Both</span>
+            <div class="card-sample card-sample--both">Hello.</div>
+            <span class="demo-note">Object on a surface</span>
+          </div>
+        </div>
+        <figcaption>Same card, three recipes. The combined version reads as an object the user could pick up.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1129,6 +1664,21 @@ box-shadow:
       <p>
         Replace the browser's default outline with a designed focus ring, but never remove it. The default looks bolted on. A custom ring in the accent color signals that keyboard navigation is a first-class path, not an oversight.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--2col">
+          <div class="demo-col">
+            <span class="demo-tag">Browser default</span>
+            <button class="focus-btn focus-btn--default">Tab to me</button>
+            <span class="demo-note">Looks bolted on</span>
+          </div>
+          <div class="demo-col">
+            <span class="demo-tag">Designed ring</span>
+            <button class="focus-btn focus-btn--designed">Tab to me</button>
+            <span class="demo-note">Belongs to the system</span>
+          </div>
+        </div>
+        <figcaption>Tab into each button with your keyboard. Same button, two levels of care.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1192,6 +1742,16 @@ box-shadow:
       <p>
         A tooltip that opens at <code>0ms</code> is noise. A tooltip that always waits <code>500ms</code> means scanning a toolbar takes forever. The tiered delay reads user intent: first tooltip opens after ~500ms, subsequent tooltips in the same toolbar open instantly as the cursor sweeps across.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--row" data-tooltip-row>
+          <button class="tip-btn" data-tip="Bold · ⌘B">B</button>
+          <button class="tip-btn" data-tip="Italic · ⌘I"><em>I</em></button>
+          <button class="tip-btn" data-tip="Underline · ⌘U"><span style="text-decoration:underline">U</span></button>
+          <button class="tip-btn" data-tip="Strike · ⌘⇧X"><span style="text-decoration:line-through">S</span></button>
+          <button class="tip-btn" data-tip="Link · ⌘K">L</button>
+        </div>
+        <figcaption>Hover the first button and wait. Then sweep across the row. The first delays 500ms, the rest are instant.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1258,6 +1818,22 @@ box-shadow:
       <p>
         Every destructive action surfaces an undo affordance for ~5 seconds before becoming permanent. Confidence comes from reversibility. <em>Are you sure?</em> dialogs interrupt flow. A short undo window protects without nagging.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--stack">
+          <div class="demo-col" style="min-height: 160px;">
+            <span class="demo-tag">Delete then undo</span>
+            <button class="toast-btn" id="toastTrigger">Delete item</button>
+            <div class="toast-wrap">
+              <div class="toast" id="toastEl" role="status" aria-live="polite">
+                <span>Item deleted</span>
+                <button class="toast-undo" id="toastUndo">Undo</button>
+                <div class="toast-progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Click Delete. A toast offers Undo for four seconds. The timeline progress bar is the small detail users never consciously register and always expect.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1278,6 +1854,23 @@ box-shadow:
       <p>
         While data loads, render gray placeholder rectangles that match the actual layout, not a centered spinner. Skeletons signal <em>your data is coming, here is the shape it will take.</em> Spinners signal <em>something is happening, no idea what.</em> The perceived-latency drop is measurable; the feel difference is immediate.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--stack">
+          <div class="demo-col" style="min-height: 180px;">
+            <span class="demo-tag">Loading state</span>
+            <div class="skel-card" id="skelCard" data-state="loaded">
+              <div class="skel-avatar">D</div>
+              <div class="skel-body">
+                <div class="skel-title">Ship faster with live data</div>
+                <div class="skel-sub">3 hrs ago · Vercel Cloud</div>
+              </div>
+              <div class="skel-badge">Ready</div>
+            </div>
+            <button class="skel-toggle" id="skelToggle">Reload</button>
+          </div>
+        </div>
+        <figcaption>Click Reload. The card morphs into a skeleton shaped like its real content, then reveals. Spinner equivalent would show a single spinning glyph in the middle of a blank card.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1497,6 +2090,28 @@ box-shadow:
       <p>
         Let power users choose tighter row heights. Default new users to comfortable. Density is a personal preference that scales with experience. New users want breathing room; daily users want fifty rows on screen. Forcing either is a tax on the other.
       </p>
+      <figure class="demo">
+        <div class="demo-stage demo-stage--stack">
+          <div class="demo-col" style="min-height: 260px;">
+            <span class="demo-tag">Display options</span>
+            <div class="density-wrap">
+              <div class="density-toolbar" id="densityToolbar">
+                <span style="padding: 0 8px; font-size: 11px; font-family: var(--ff-mono); color: var(--ink-subtle); letter-spacing: 0.1em; text-transform: uppercase;">Display</span>
+                <button class="is-active" data-density="comfy">Comfortable</button>
+                <button data-density="compact">Compact</button>
+              </div>
+              <div class="density-list" id="densityList" data-density="comfy">
+                <div class="density-row"><span class="dot"></span>Triage the inbox</div>
+                <div class="density-row"><span class="dot"></span>Weekly review, Monday 9am</div>
+                <div class="density-row"><span class="dot"></span>Plan the quarter</div>
+                <div class="density-row"><span class="dot"></span>Retros Friday afternoon</div>
+                <div class="density-row"><span class="dot"></span>Ship the portfolio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Toggle between modes. The same list; two rhythms. A daily user will pick compact in under a week.</figcaption>
+      </figure>
       <div class="wild">
         <span class="wild-label">In the wild</span>
         <ul>
@@ -1616,6 +2231,135 @@ if (!prefersReduced) {
   }, { threshold: 0, rootMargin: '0px 0px -48px 0px' });
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 }
+
+// ════════════════════════════════════════════════════════════════════
+// DEMOS
+// ════════════════════════════════════════════════════════════════════
+
+// Demo 1: Tabular numerals ticker
+(() => {
+  const prop = document.getElementById('demoCountProp');
+  const tab = document.getElementById('demoCountTab');
+  if (!prop || !tab) return;
+  const values = [111, 108, 118, 110, 101, 111];
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % values.length;
+    const v = String(values[i]);
+    prop.textContent = v;
+    tab.textContent = v;
+  }, 900);
+})();
+
+// Demo 5: Spring vs bezier motion
+(() => {
+  document.querySelectorAll('.motion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      target.classList.toggle('is-on');
+    });
+  });
+})();
+
+// Demo 10: Tooltip tier (500ms first, 0ms subsequent while sweeping)
+(() => {
+  const rows = document.querySelectorAll('[data-tooltip-row]');
+  rows.forEach(row => {
+    let tipOpen = false;
+    let delayTimer = 0;
+    let resetTimer = 0;
+    const FIRST_DELAY = 500;
+    const RESET_AFTER = 500;
+
+    const open = (btn) => {
+      row.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('is-tip-on'));
+      btn.classList.add('is-tip-on');
+      tipOpen = true;
+    };
+    const close = (btn) => { btn.classList.remove('is-tip-on'); };
+    const closeAll = () => {
+      row.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('is-tip-on'));
+      tipOpen = false;
+    };
+
+    row.querySelectorAll('.tip-btn').forEach(btn => {
+      btn.addEventListener('pointerenter', () => {
+        clearTimeout(delayTimer);
+        clearTimeout(resetTimer);
+        if (tipOpen) {
+          open(btn); // instant on subsequent sweeps
+        } else {
+          delayTimer = setTimeout(() => open(btn), FIRST_DELAY);
+        }
+      });
+      btn.addEventListener('pointerleave', () => {
+        clearTimeout(delayTimer);
+        close(btn);
+        resetTimer = setTimeout(() => { tipOpen = false; }, RESET_AFTER);
+      });
+    });
+  });
+})();
+
+// Demo 9: Toast with undo
+(() => {
+  const trigger = document.getElementById('toastTrigger');
+  const toast = document.getElementById('toastEl');
+  const undo = document.getElementById('toastUndo');
+  if (!trigger || !toast || !undo) return;
+
+  let hideTimer = 0;
+  const show = () => {
+    clearTimeout(hideTimer);
+    toast.classList.remove('is-in');
+    // re-flow so the progress animation restarts
+    void toast.offsetWidth;
+    toast.classList.add('is-in');
+    hideTimer = setTimeout(() => toast.classList.remove('is-in'), 4000);
+  };
+  const hide = () => {
+    clearTimeout(hideTimer);
+    toast.classList.remove('is-in');
+  };
+
+  trigger.addEventListener('click', show);
+  undo.addEventListener('click', hide);
+
+  toast.addEventListener('pointerenter', () => clearTimeout(hideTimer));
+  toast.addEventListener('pointerleave', () => {
+    hideTimer = setTimeout(() => toast.classList.remove('is-in'), 1500);
+  });
+})();
+
+// Demo 8: Skeleton toggle
+(() => {
+  const card = document.getElementById('skelCard');
+  const btn = document.getElementById('skelToggle');
+  if (!card || !btn) return;
+  btn.addEventListener('click', () => {
+    card.dataset.state = 'loading';
+    btn.disabled = true;
+    setTimeout(() => {
+      card.dataset.state = 'loaded';
+      btn.disabled = false;
+    }, 1800);
+  });
+})();
+
+// Demo 11: Density toggle
+(() => {
+  const toolbar = document.getElementById('densityToolbar');
+  const list = document.getElementById('densityList');
+  if (!toolbar || !list) return;
+  toolbar.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toolbar.querySelectorAll('button').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      list.dataset.density = btn.dataset.density;
+    });
+  });
+})();
 </script>
 
 </body>
